@@ -1,0 +1,144 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+const mapSrc =
+  'https://maps.google.com/maps?width=600&height=400&hl=en&q=Manga%20Caf%C3%A9%20Porto&t=&z=15&ie=UTF8&iwloc=B&output=embed';
+---
+
+<section
+  id='contact'
+  class='contact'
+  aria-labelledby='contact-title'>
+  <div class='contact-inner container'>
+    <SectionHeader
+      id='contact-title'
+      title={t.contact.title}
+      jp={t.contact.jp}
+    />
+
+    <div class='contact-content'>
+      <div class='contact-info reveal'>
+        <div class='contact-block'>
+          <h3 class='contact-label'>{t.contact.address_label}</h3>
+          <address class='contact-address'>
+            {t.contact.address}
+          </address>
+        </div>
+
+        <div class='contact-block'>
+          <h3 class='contact-label'>{t.contact.socials_label}</h3>
+          <div class='contact-social'>
+            <a
+              href='https://www.instagram.com/mangacafe_porto'
+              target='_blank'
+              rel='noopener noreferrer'
+              class='link-animated'>
+              Instagram
+            </a>
+            <a
+              href='https://www.facebook.com/people/MANGA-CAFE-PORTO/61578631384335/'
+              target='_blank'
+              rel='noopener noreferrer'
+              class='link-animated'>
+              Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class='contact-map reveal'>
+        <iframe
+          src={mapSrc}
+          width='100%'
+          height='350'
+          style='border:0;'
+          allowfullscreen
+          loading='lazy'
+          referrerpolicy='no-referrer-when-downgrade'
+          title={t.contact.map_title}
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    border-top: var(--border-thin) solid var(--color-cobalt);
+  }
+
+  .contact-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  .contact-content {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 48rem) {
+    .contact-content {
+      grid-template-columns: 1fr 1.5fr;
+      align-items: start;
+    }
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact-label {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-cobalt);
+  }
+
+  .contact-address {
+    font-style: normal;
+    font-size: var(--text-lg);
+    line-height: 1.6;
+  }
+
+  .contact-social {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .contact-social a {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    color: var(--color-crimson);
+  }
+
+  .contact-map {
+    border: var(--border-medium) solid var(--color-crimson);
+    overflow: hidden;
+    transform: rotate(-0.5deg);
+  }
+
+  .contact-map iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+</style>

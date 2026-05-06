@@ -1,0 +1,85 @@
+{
+  "site": {
+    "title": "Manga Café Porto",
+    "descriptor": "Café de manga e espaço criativo em Cedofeita",
+    "og_description": "Café de manga e espaço criativo em Cedofeita, Porto. Manga, café, chá e comunidade.",
+    "og_locale": "pt_PT"
+  },
+  "nav": {
+    "home": "Início",
+    "pricing": "Preços",
+    "menu": "Menu",
+    "library": "Manga",
+    "events": "Eventos",
+    "gallery": "O Espaço",
+    "contact": "Visita-nos",
+    "open_menu": "Abrir menu"
+  },
+  "hero": {
+    "location_label": "Localização",
+    "hours_label": "Horário",
+    "hours_tue_sun": "Ter – Dom: 12h – 20h",
+    "hours_mon": "Seg: 13h – 20h",
+    "address": "R. de Cedofeita 170 Loja 2, 4050-173 Porto",
+    "cta": "Ver preços",
+    "cta_visit": "Como chegar"
+  },
+  "blurb": {
+    "text": "Um cantinho acolhedor em Cedofeita onde podes ler manga, trabalhar, estudar ou simplesmente relaxar com um café ou chá. Um espaço para a comunidade criativa do Porto."
+  },
+  "pricing": {
+    "title": "Preços",
+    "jp": "料金",
+    "drop_in_title": "Entrada Avulsa",
+    "per_hour": "5€ /hora",
+    "pack_3h": "Pack 3 horas — 12€",
+    "extension": "Extensão — 5€",
+    "includes": "Inclui: leitura ilimitada de manga, chá e café",
+    "note": "Todos os passes incluem manga ilimitado, chá e café, e são pagos no local.",
+    "nomad_title": "Nomad Worker — Pack Mensal",
+    "nomad_desc": "Tempo focado de trabalho e estudo num ambiente criativo",
+    "nomad_price": "60€ /mês",
+    "nomad_perk": "Entrada gratuita entre as 12h e 16h em dias úteis",
+    "vip_title": "All-Access VIP Pass",
+    "vip_desc": "O passe definitivo para a comunidade",
+    "vip_price": "100€ /mês",
+    "vip_perk": "Entrada gratuita durante todo o horário e eventos",
+    "paid_at_cafe": "Todos os passes são pagos no café."
+  },
+  "menu": {
+    "title": "Menu",
+    "jp": "メニュー",
+    "included_title": "Incluído na entrada",
+    "included_items": ["Chá", "Café"],
+    "available_title": "Disponível para compra",
+    "available_items": ["Cerveja", "Sake", "Vinho"],
+    "occasional_title": "Especialidades ocasionais",
+    "occasional_text_before": "Onigiri, ogura toast e bagels artesanais em colaboração com"
+  },
+  "library": {
+    "title": "Manga",
+    "jp": "漫画",
+    "description": "Uma coleção acolhedora de manga em japonês, inglês e português. Acomoda-te e explora.",
+    "highlights": ["Nana", "Demon Slayer", "Tokyo Ghoul", "Spy × Family", "Boku no Hero Academia"],
+    "languages": { "jp": "日本語", "en": "English", "pt": "Português" },
+    "shelf_alt": "Prateleira de manga",
+    "volumes_alt": "Volumes de manga"
+  },
+  "events": {
+    "title": "Eventos",
+    "jp": "イベント",
+    "blurb": "Organizamos eventos regulares — desde noites Horo-yoi com sake e petiscos a encontros de leitura e workshops criativos. Segue-nos para saberes o que vem aí.",
+    "follow_cta": "Segue-nos para novidades",
+    "facebook_placeholder": "Acompanha-nos no Facebook para novidades e eventos."
+  },
+  "gallery": { "title": "O Espaço", "jp": "空間" },
+  "contact": {
+    "title": "Visita-nos",
+    "jp": "場所",
+    "address": "R. de Cedofeita 170 Loja 2, 4050-173 Porto",
+    "address_label": "Morada",
+    "socials_label": "Redes Sociais",
+    "map_title": "Mapa — Manga Café Porto"
+  },
+  "footer": { "copyright": "© {year} Manga Café Porto" }
+}

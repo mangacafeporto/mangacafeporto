@@ -1,0 +1,30 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  jp: string;
+}
+
+const { id, title, jp } = Astro.props;
+---
+
+<div class='section-header reveal'>
+  <h2
+    id={id}
+    class='section-header-title'
+    >{title}</h2
+  >
+  <span class='jp-accent'>{jp}</span>
+</div>
+
+<style>
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  .section-header-title {
+    color: var(--color-crimson);
+  }
+</style>

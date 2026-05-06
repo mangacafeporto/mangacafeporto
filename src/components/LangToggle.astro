@@ -1,0 +1,85 @@
+---
+import { type Locale, locales, getLocalePath } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const localeLabels: Record<string, { code: string; name: string }> = {
+  pt: { code: 'PT', name: 'Português' },
+  en: { code: 'EN', name: 'English' },
+  ja: { code: 'JA', name: '日本語' },
+};
+---
+
+<div class='lang-toggle'>
+  {
+    locales.map((l, i) => (
+      <>
+        {i > 0 && <span class='lang-divider'>|</span>}
+        {l === locale ? (
+          <span
+            class='lang-option active'
+            aria-current='page'>
+            {localeLabels[l].code}
+          </span>
+        ) : (
+          <a
+            href={getLocalePath(l)}
+            class='lang-option'
+            aria-label={localeLabels[l].name}>
+            {localeLabels[l].code}
+          </a>
+        )}
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .lang-toggle {
+    position: fixed;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .lang-option {
+    color: var(--color-cobalt);
+    text-decoration: none;
+    padding: 0.15em 0.3em;
+    position: relative;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .lang-option.active {
+    color: var(--color-crimson);
+  }
+
+  .lang-option.active::after {
+    content: '';
+    position: absolute;
+    inset: -4px -6px;
+    border: var(--border-medium) solid var(--color-crimson);
+    border-radius: 50% 45% 55% 48% / 48% 52% 45% 55%;
+    transform: rotate(-3deg);
+    pointer-events: none;
+  }
+
+  .lang-option:not(.active):hover {
+    color: var(--color-text);
+  }
+
+  .lang-divider {
+    color: var(--color-text-muted);
+    user-select: none;
+  }
+</style>

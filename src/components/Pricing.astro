@@ -1,0 +1,131 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section
+  id='pricing'
+  class='pricing'
+  aria-labelledby='pricing-title'>
+  <div class='pricing-inner container'>
+    <SectionHeader
+      id='pricing-title'
+      title={t.pricing.title}
+      jp={t.pricing.jp}
+    />
+
+    <p class='pricing-desc reveal'>{t.pricing.note}</p>
+
+    <div class='pricing-dropin reveal'>
+      <div class='pricing-card pricing-card-dropin'>
+        <h3 class='pricing-card-title'>{t.pricing.drop_in_title}</h3>
+        <div class='pricing-card-price'>{t.pricing.per_hour}</div>
+        <p class='pricing-card-perk'>{t.pricing.pack_3h}</p>
+      </div>
+    </div>
+
+    <div class='pricing-tiers'>
+      <div class='pricing-card pricing-card-nomad reveal'>
+        <h3 class='pricing-card-title'>{t.pricing.nomad_title}</h3>
+        <p class='pricing-card-desc'>{t.pricing.nomad_desc}</p>
+        <div class='pricing-card-price pricing-card-price-large'>{t.pricing.nomad_price}</div>
+        <p class='pricing-card-perk'>{t.pricing.nomad_perk}</p>
+      </div>
+
+      <div class='pricing-card pricing-card-vip reveal'>
+        <h3 class='pricing-card-title'>{t.pricing.vip_title}</h3>
+        <p class='pricing-card-desc'>{t.pricing.vip_desc}</p>
+        <div class='pricing-card-price pricing-card-price-large'>{t.pricing.vip_price}</div>
+        <p class='pricing-card-perk'>{t.pricing.vip_perk}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    border-top: var(--border-thin) solid var(--color-crimson);
+    padding-top: var(--space-md);
+  }
+
+  .pricing-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  .pricing-desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
+  .pricing-dropin {
+    max-width: 28rem;
+  }
+
+  .pricing-card {
+    padding: var(--space-lg);
+    border: var(--border-medium) solid var(--color-crimson);
+    position: relative;
+  }
+
+  .pricing-card-dropin {
+    border-style: dashed;
+  }
+
+  .pricing-card-title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .pricing-card-desc {
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-md);
+  }
+
+  .pricing-card-price {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--color-crimson);
+    margin-bottom: var(--space-sm);
+  }
+
+  .pricing-card-price-large {
+    font-size: var(--text-3xl);
+  }
+
+  .pricing-card-perk {
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
+  .pricing-tiers {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .pricing-tiers {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pricing-card-vip {
+      transform: translateY(1.5rem);
+    }
+  }
+
+  .pricing-card-vip {
+    border-color: var(--color-crimson);
+    border-width: var(--border-thick);
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section
+  id='menu'
+  class='menu'
+  aria-labelledby='menu-title'>
+  <div class='menu-inner container'>
+    <SectionHeader
+      id='menu-title'
+      title={t.menu.title}
+      jp={t.menu.jp}
+    />
+
+    <div class='menu-grid'>
+      <div class='menu-group menu-group--included reveal'>
+        <h3 class='menu-group-title menu-group-title--blue'>{t.menu.included_title}</h3>
+        <ul class='menu-items'>
+          {t.menu.included_items.map((item: string) => <li class='menu-item'>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class='menu-group menu-group--available reveal'>
+        <h3 class='menu-group-title'>{t.menu.available_title}</h3>
+        <ul class='menu-items'>
+          {t.menu.available_items.map((item: string) => <li class='menu-item'>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class='menu-group menu-group--occasional reveal'>
+        <h3 class='menu-group-title menu-group-title--blue'>{t.menu.occasional_title}</h3>
+        <p class='menu-occasional-text'>
+          {t.menu.occasional_text_before}
+          <a
+            href='https://www.instagram.com/once.upon.a.bagel_aino'
+            target='_blank'
+            rel='noopener noreferrer'
+            class='link-animated'
+            >@once.upon.a.bagel_aino</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .menu {
+    border-top: var(--border-thin) solid var(--color-cobalt);
+  }
+
+  .menu-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  .menu-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .menu-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .menu-group--occasional {
+      grid-column: 1 / -1;
+      max-width: 36rem;
+      margin-left: 15%;
+    }
+  }
+
+  .menu-group {
+    padding: var(--space-lg);
+    border: var(--border-thin) solid var(--color-crimson);
+  }
+
+  .menu-group--included {
+    border-color: var(--color-cobalt);
+    border-style: dashed;
+  }
+
+  .menu-group--occasional {
+    border-style: none;
+    border-left: var(--border-thick) solid var(--color-cobalt);
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .menu-group-title {
+    font-size: var(--text-lg);
+    color: var(--color-crimson);
+    margin-bottom: var(--space-md);
+  }
+
+  .menu-group-title--blue {
+    color: var(--color-cobalt);
+  }
+
+  .menu-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .menu-item {
+    font-size: var(--text-lg);
+    padding-left: 1em;
+    position: relative;
+  }
+
+  .menu-item::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--color-crimson);
+    font-weight: 700;
+  }
+
+  .menu-occasional-text {
+    font-style: italic;
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+</style>
+-

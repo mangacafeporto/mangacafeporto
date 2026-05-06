@@ -1,0 +1,228 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section
+  id='hero'
+  class='hero'
+  aria-label={t.nav.home}>
+  <div class='hero-inner container'>
+    <div class='hero-logo'>
+      <img
+        src='/images/logo.png'
+        alt='Manga Café Porto'
+        class='hero-logo-img'
+        width='140'
+        height='140'
+      />
+    </div>
+
+    <div class='hero-text'>
+      <h1 class='hero-title'>Manga Café Porto</h1>
+      <p class='hero-descriptor'>{t.site.descriptor}</p>
+    </div>
+
+    <div class='hero-info'>
+      <div class='hero-hours'>
+        <span class='hero-info-label'>{t.hero.hours_label}</span>
+        <span>{t.hero.hours_tue_sun}</span>
+        <span>{t.hero.hours_mon}</span>
+      </div>
+      <div
+        class='hero-divider'
+        aria-hidden='true'
+      ></div>
+      <div class='hero-hours'>
+        <span class='hero-info-label'>{t.hero.location_label}</span>
+        <address class='hero-address'>
+          {t.hero.address}
+        </address>
+      </div>
+    </div>
+
+    <div class='hero-ctas'>
+      <a
+        href='#contact'
+        class='btn btn-primary hero-cta'
+        >{t.hero.cta_visit}</a
+      >
+      <a
+        href='#pricing'
+        class='btn btn-secondary hero-cta'
+        >{t.hero.cta}</a
+      >
+    </div>
+  </div>
+
+  <div
+    class='hero-corner hero-corner--tl'
+    aria-hidden='true'
+  ></div>
+  <div
+    class='hero-corner hero-corner--br'
+    aria-hidden='true'
+  ></div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-2xl);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  .hero-logo {
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  @media (min-width: 40rem) {
+    .hero-logo {
+      width: 220px;
+      height: 220px;
+    }
+  }
+
+  .hero-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: var(--text-4xl);
+    color: var(--color-crimson);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-descriptor {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--color-text-light);
+    font-style: italic;
+    max-width: 40ch;
+  }
+
+  .hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  @media (min-width: 40rem) {
+    .hero-info {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-lg);
+    }
+  }
+
+  .hero-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+  }
+
+  .hero-info-label {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--color-crimson);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-divider {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    .hero-divider {
+      display: block;
+      width: var(--border-thin);
+      align-self: stretch;
+      background-color: var(--color-crimson);
+      opacity: 0.4;
+    }
+  }
+
+  .hero-address {
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+  }
+
+  .hero-cta {
+    font-size: var(--text-base);
+    padding: var(--space-sm) var(--space-xl);
+    letter-spacing: 0.03em;
+  }
+
+  .hero-corner {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    border-color: var(--color-cobalt);
+    opacity: 0.7;
+  }
+
+  .hero-corner--tl {
+    top: var(--space-lg);
+    left: var(--content-padding);
+    border-top: var(--border-medium) solid var(--color-cobalt);
+    border-left: var(--border-medium) solid var(--color-cobalt);
+  }
+
+  .hero-corner--br {
+    bottom: var(--space-lg);
+    right: var(--content-padding);
+    border-bottom: var(--border-medium) solid var(--color-cobalt);
+    border-right: var(--border-medium) solid var(--color-cobalt);
+  }
+
+  @media (min-width: 64rem) {
+    .hero-corner {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+</style>

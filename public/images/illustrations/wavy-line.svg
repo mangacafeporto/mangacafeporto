@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 12" preserveAspectRatio="none">
+  <!-- Hand-drawn wavy line -->
+  <path d="M0 6 C50 2, 100 10, 150 6 C200 2, 250 10, 300 6 C350 2, 400 10, 450 6 C500 2, 550 10, 600 6 C650 2, 700 10, 750 6 C800 2, 850 10, 900 6 C950 2, 1000 10, 1050 6 C1100 2, 1150 10, 1200 6" stroke="#C8302C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

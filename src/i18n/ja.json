@@ -1,0 +1,85 @@
+{
+  "site": {
+    "title": "Manga Café Porto",
+    "descriptor": "セドフェイタのマンガカフェ＆クリエイティブスペース",
+    "og_description": "ポルト、セドフェイタにあるマンガカフェ＆クリエイティブスペース。マンガ、コーヒー、お茶、そしてコミュニティ。",
+    "og_locale": "ja_JP"
+  },
+  "nav": {
+    "home": "ホーム",
+    "pricing": "料金",
+    "menu": "メニュー",
+    "library": "漫画",
+    "events": "イベント",
+    "gallery": "空間",
+    "contact": "アクセス",
+    "open_menu": "メニューを開く"
+  },
+  "hero": {
+    "location_label": "住所",
+    "hours_label": "営業時間",
+    "hours_tue_sun": "火〜日：12時〜20時",
+    "hours_mon": "月：13時〜20時",
+    "address": "R. de Cedofeita 170 Loja 2, 4050-173 Porto",
+    "cta": "料金を見る",
+    "cta_visit": "アクセス"
+  },
+  "blurb": {
+    "text": "セドフェイタの居心地の良い一角で、漫画を読んだり、仕事をしたり、勉強したり、コーヒーやお茶と一緒にくつろいだり。ポルトのクリエイティブコミュニティのためのスペースです。"
+  },
+  "pricing": {
+    "title": "料金",
+    "jp": "料金",
+    "drop_in_title": "ドロップイン",
+    "per_hour": "€5 /時間",
+    "pack_3h": "3時間パック — €12",
+    "extension": "延長 — €5",
+    "includes": "含まれるもの：漫画読み放題、お茶＆コーヒー",
+    "note": "すべてのパスには漫画読み放題、お茶＆コーヒーが含まれ、カフェでのお支払いとなります。",
+    "nomad_title": "ノマドワーカー — 月額パック",
+    "nomad_desc": "クリエイティブな環境での集中ワーク＆スタディタイム",
+    "nomad_price": "€60 /月",
+    "nomad_perk": "平日12時〜16時の無料入場",
+    "vip_title": "オールアクセスVIPパス",
+    "vip_desc": "真のコミュニティメンバーのための究極パス",
+    "vip_price": "€100 /月",
+    "vip_perk": "全時間帯・全イベント無料入場",
+    "paid_at_cafe": "すべてのパスはカフェでのお支払いとなります。"
+  },
+  "menu": {
+    "title": "メニュー",
+    "jp": "メニュー",
+    "included_title": "入場料に含まれるもの",
+    "included_items": ["お茶", "コーヒー"],
+    "available_title": "購入可能",
+    "available_items": ["ビール", "日本酒", "ワイン"],
+    "occasional_title": "期間限定スペシャル",
+    "occasional_text_before": "おにぎり、小倉トースト＆職人ベーグル、コラボレーション："
+  },
+  "library": {
+    "title": "漫画",
+    "jp": "漫画",
+    "description": "日本語、英語、ポルトガル語の漫画コレクション。ゆっくり座って、お気に入りを見つけてください。",
+    "highlights": ["NANA", "鬼滅の刃", "東京喰種", "SPY×FAMILY", "僕のヒーローアカデミア"],
+    "languages": { "jp": "日本語", "en": "English", "pt": "Português" },
+    "shelf_alt": "漫画の本棚",
+    "volumes_alt": "漫画の巻"
+  },
+  "events": {
+    "title": "イベント",
+    "jp": "イベント",
+    "blurb": "日本酒とおつまみのほろ酔いナイトから、読書会やクリエイティブワークショップまで、定期的にイベントを開催しています。最新情報はフォローしてチェック！",
+    "follow_cta": "フォローして最新情報をチェック",
+    "facebook_placeholder": "Facebookでニュースやイベント情報をチェック。"
+  },
+  "gallery": { "title": "空間", "jp": "空間" },
+  "contact": {
+    "title": "アクセス",
+    "jp": "場所",
+    "address": "R. de Cedofeita 170 Loja 2, 4050-173 Porto",
+    "address_label": "住所",
+    "socials_label": "フォローする",
+    "map_title": "地図 — Manga Café Porto"
+  },
+  "footer": { "copyright": "© {year} Manga Café Porto" }
+}

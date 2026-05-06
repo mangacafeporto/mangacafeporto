@@ -1,0 +1,112 @@
+---
+const illustrations = [
+  { src: 'coffee-mug', top: 2, left: 2, r: -18, s: 44 },
+  { src: 'kimono', top: 3, left: 35, r: 10, s: 36 },
+  { src: 'onigiri', top: 4, right: 3, r: 14, s: 40 },
+  { src: 'daruma', top: 7, left: 8, r: -8, s: 38 },
+  { src: 'cherry-blossom', top: 8, right: 20, r: 22, s: 32 },
+  { src: 'maneki', top: 10, right: 2, r: -12, s: 42 },
+  { src: 'lantern', top: 13, left: 3, r: 16, s: 36 },
+  { src: 'torii', top: 14, left: 25, r: -6, s: 48 },
+  { src: 'ramen', top: 16, right: 5, r: 20, s: 40 },
+  { src: 'temple', top: 19, left: 5, r: -15, s: 38 },
+  { src: 'sensu', top: 20, right: 30, r: 8, s: 34 },
+  { src: 'sake', top: 22, right: 3, r: -22, s: 44 },
+  { src: 'tea', top: 25, left: 2, r: 12, s: 36 },
+  { src: 'book', top: 26, left: 40, r: -10, s: 38 },
+  { src: 'origami', top: 28, right: 6, r: 18, s: 42 },
+  { src: 'yotsuba', top: 31, left: 7, r: -20, s: 36 },
+  { src: 'fuji', top: 32, right: 25, r: 6, s: 44 },
+  { src: 'koi', top: 34, right: 2, r: -14, s: 40 },
+  { src: 'bamboo', top: 37, left: 3, r: 24, s: 38 },
+  { src: 'coffee-mug', top: 38, left: 30, r: -8, s: 32 },
+  { src: 'kimono', top: 40, right: 5, r: 15, s: 36 },
+  { src: 'onigiri', top: 43, left: 5, r: -18, s: 44 },
+  { src: 'daruma', top: 44, right: 35, r: 10, s: 34 },
+  { src: 'maneki', top: 46, right: 2, r: -6, s: 40 },
+  { src: 'lantern', top: 49, left: 2, r: 22, s: 38 },
+  { src: 'cherry-blossom', top: 50, left: 20, r: -12, s: 32 },
+  { src: 'torii', top: 52, right: 7, r: 16, s: 46 },
+  { src: 'ramen', top: 55, left: 6, r: -25, s: 40 },
+  { src: 'sensu', top: 56, right: 28, r: 8, s: 36 },
+  { src: 'temple', top: 58, right: 3, r: -10, s: 42 },
+  { src: 'tea', top: 61, left: 3, r: 14, s: 36 },
+  { src: 'sake', top: 62, left: 38, r: -20, s: 40 },
+  { src: 'origami', top: 64, right: 5, r: 22, s: 38 },
+  { src: 'book', top: 67, left: 8, r: -16, s: 44 },
+  { src: 'fuji', top: 68, right: 22, r: 5, s: 36 },
+  { src: 'yotsuba', top: 70, right: 2, r: -8, s: 38 },
+  { src: 'koi', top: 73, left: 2, r: 20, s: 40 },
+  { src: 'bamboo', top: 74, left: 32, r: -14, s: 34 },
+  { src: 'kimono', top: 76, right: 6, r: 12, s: 42 },
+  { src: 'coffee-mug', top: 79, left: 5, r: -22, s: 38 },
+  { src: 'daruma', top: 80, right: 30, r: 18, s: 36 },
+  { src: 'onigiri', top: 82, right: 3, r: -6, s: 44 },
+  { src: 'lantern', top: 85, left: 3, r: 16, s: 38 },
+  { src: 'cherry-blossom', top: 86, left: 28, r: -10, s: 32 },
+  { src: 'maneki', top: 88, right: 5, r: 24, s: 40 },
+  { src: 'ramen', top: 91, left: 7, r: -15, s: 36 },
+  { src: 'torii', top: 93, right: 2, r: 8, s: 46 },
+  { src: 'tea', top: 95, left: 2, r: -20, s: 38 },
+  { src: 'sensu', top: 97, right: 18, r: 14, s: 34 },
+];
+---
+
+<div
+  class='scatter'
+  aria-hidden='true'>
+  {
+    illustrations.map(item => (
+      <img
+        src={`/images/illustrations/${item.src}.svg`}
+        alt=''
+        class='scatter-item'
+        width={item.s}
+        height={item.s}
+        style={`top:${item.top}%;${item.left != null ? `left:${item.left}%` : `right:${item.right}%`};transform:rotate(${item.r}deg)`}
+      />
+    ))
+  }
+</div>
+
+<style is:global>
+  .scatter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+    display: none;
+  }
+
+  .scatter-item {
+    position: absolute;
+    opacity: 0.1;
+  }
+
+  @media (min-width: 48rem) {
+    .scatter {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  function syncScatterHeight() {
+    const scatter = document.querySelector('.scatter') as HTMLElement;
+    if (scatter) {
+      scatter.style.height = document.documentElement.scrollHeight + 'px';
+    }
+  }
+
+  function initScatter() {
+    syncScatterHeight();
+    window.addEventListener('resize', syncScatterHeight);
+    const ro = new ResizeObserver(() => syncScatterHeight());
+    ro.observe(document.body);
+  }
+
+  initScatter();
+  document.addEventListener('astro:after-swap', initScatter);
+</script>
