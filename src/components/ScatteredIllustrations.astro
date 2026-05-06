@@ -129,5 +129,7 @@ const illustrations = [
   }
   syncScatterHeight();
   window.addEventListener('resize', syncScatterHeight);
-  window.addEventListener('load', syncScatterHeight);
+
+  const ro = new ResizeObserver(() => syncScatterHeight());
+  ro.observe(document.body);
 </script>

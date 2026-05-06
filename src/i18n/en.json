@@ -39,8 +39,6 @@
     "vip_title": "All-Access VIP Pass",
     "vip_desc": "The ultimate pass for the true community member",
     "vip_price": "€100 /month",
-    "vip_perk_1": "Free entry during all opening hours",
-    "vip_perk_2": "Free entry to all events",
     "vip_perk": "Free entry during all hours and events",
     "paid_at_cafe": "All passes are paid at the café."
   },

@@ -22,11 +22,11 @@ const t = getTranslations(locale);
         >{t.pricing.title}</h2
       >
       <span class='jp-accent'>{t.pricing.jp}</span>
+    </div>
 
-      <div class='pricing__notes'>
-        <span class='pricing__note'>{t.pricing.paid_at_cafe}</span>
-        <p class='pricing__includes'>{t.pricing.includes}</p>
-      </div>
+    <div class='pricing__notes reveal'>
+      <span class='pricing__note'>{t.pricing.paid_at_cafe}</span>
+      <p class='pricing__includes'>{t.pricing.includes}</p>
     </div>
 
     <!-- Drop-in pricing -->
@@ -81,12 +81,19 @@ const t = getTranslations(locale);
   .pricing__header {
     display: flex;
     align-items: baseline;
-    flex-wrap: wrap;
     gap: var(--space-md);
+    align-self: flex-start;
   }
 
   .pricing__title {
     color: var(--color-crimson);
+  }
+
+  .pricing__notes {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-style: italic;
+    text-align: right;
   }
 
   /* Drop-in card */
@@ -167,20 +174,14 @@ const t = getTranslations(locale);
     border-width: var(--border-thick);
   }
 
-  .pricing__notes {
-    flex-basis: 100%;
-  }
-
   .pricing__note {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    font-style: italic;
+    display: block;
   }
 
   .pricing__includes {
-    font-size: var(--text-sm);
     color: var(--color-text-light);
-    font-style: italic;
     margin-top: var(--space-xs);
+    max-width: none;
+    margin-left: auto;
   }
 </style>

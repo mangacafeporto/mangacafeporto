@@ -48,11 +48,11 @@ const altUrl = getLocalePath(altLocale);
   </head>
   <body>
     <div class="page">
-      <a href="#hero" class="sr-only">Skip to content</a>
+      <a href="#main" class="sr-only">Skip to content</a>
       <LangToggle locale={locale} altLocale={altLocale} altUrl={altUrl} />
       <Navigation locale={locale} />
 
-      <main>
+      <main id="main">
         <slot />
       </main>
 
