@@ -1,0 +1,133 @@
+---
+/**
+ * Zine-style scattered decorative illustrations.
+ * Rendered once in the base layout, positioned absolutely across the full page.
+ */
+const all = [
+  'coffee-mug',
+  'onigiri',
+  'maneki',
+  'torii',
+  'temple',
+  'sake',
+  'book',
+  'yotsuba',
+  'kimono',
+  'daruma',
+  'lantern',
+  'ramen',
+  'tea',
+  'origami',
+  'koi',
+  'bamboo',
+  'cherry-blossom',
+  'sensu',
+  'fuji',
+];
+
+const illustrations = [
+  // top%  left/right%  rotation  size  icon
+  // ~3-4% spacing, alternating sides + interior hits
+  { src: all[0], top: 2, left: 2, r: -18, s: 44 },
+  { src: all[8], top: 3, left: 35, r: 10, s: 36 },
+  { src: all[1], top: 4, right: 3, r: 14, s: 40 },
+  { src: all[9], top: 7, left: 8, r: -8, s: 38 },
+  { src: all[16], top: 8, right: 20, r: 22, s: 32 },
+  { src: all[2], top: 10, right: 2, r: -12, s: 42 },
+  { src: all[10], top: 13, left: 3, r: 16, s: 36 },
+  { src: all[3], top: 14, left: 25, r: -6, s: 48 },
+  { src: all[11], top: 16, right: 5, r: 20, s: 40 },
+  { src: all[4], top: 19, left: 5, r: -15, s: 38 },
+  { src: all[17], top: 20, right: 30, r: 8, s: 34 },
+  { src: all[5], top: 22, right: 3, r: -22, s: 44 },
+  { src: all[12], top: 25, left: 2, r: 12, s: 36 },
+  { src: all[6], top: 26, left: 40, r: -10, s: 38 },
+  { src: all[13], top: 28, right: 6, r: 18, s: 42 },
+  { src: all[7], top: 31, left: 7, r: -20, s: 36 },
+  { src: all[18], top: 32, right: 25, r: 6, s: 44 },
+  { src: all[14], top: 34, right: 2, r: -14, s: 40 },
+  { src: all[15], top: 37, left: 3, r: 24, s: 38 },
+  { src: all[0], top: 38, left: 30, r: -8, s: 32 },
+  { src: all[8], top: 40, right: 5, r: 15, s: 36 },
+  { src: all[1], top: 43, left: 5, r: -18, s: 44 },
+  { src: all[9], top: 44, right: 35, r: 10, s: 34 },
+  { src: all[2], top: 46, right: 2, r: -6, s: 40 },
+  { src: all[10], top: 49, left: 2, r: 22, s: 38 },
+  { src: all[16], top: 50, left: 20, r: -12, s: 32 },
+  { src: all[3], top: 52, right: 7, r: 16, s: 46 },
+  { src: all[11], top: 55, left: 6, r: -25, s: 40 },
+  { src: all[17], top: 56, right: 28, r: 8, s: 36 },
+  { src: all[4], top: 58, right: 3, r: -10, s: 42 },
+  { src: all[12], top: 61, left: 3, r: 14, s: 36 },
+  { src: all[5], top: 62, left: 38, r: -20, s: 40 },
+  { src: all[13], top: 64, right: 5, r: 22, s: 38 },
+  { src: all[6], top: 67, left: 8, r: -16, s: 44 },
+  { src: all[18], top: 68, right: 22, r: 5, s: 36 },
+  { src: all[7], top: 70, right: 2, r: -8, s: 38 },
+  { src: all[14], top: 73, left: 2, r: 20, s: 40 },
+  { src: all[15], top: 74, left: 32, r: -14, s: 34 },
+  { src: all[8], top: 76, right: 6, r: 12, s: 42 },
+  { src: all[0], top: 79, left: 5, r: -22, s: 38 },
+  { src: all[9], top: 80, right: 30, r: 18, s: 36 },
+  { src: all[1], top: 82, right: 3, r: -6, s: 44 },
+  { src: all[10], top: 85, left: 3, r: 16, s: 38 },
+  { src: all[16], top: 86, left: 28, r: -10, s: 32 },
+  { src: all[2], top: 88, right: 5, r: 24, s: 40 },
+  { src: all[11], top: 91, left: 7, r: -15, s: 36 },
+  { src: all[3], top: 93, right: 2, r: 8, s: 46 },
+  { src: all[12], top: 95, left: 2, r: -20, s: 38 },
+  { src: all[17], top: 97, right: 18, r: 14, s: 34 },
+];
+---
+
+<div
+  class='scatter'
+  aria-hidden='true'>
+  {
+    illustrations.map(item => (
+      <img
+        src={`/images/illustrations/${item.src}.svg`}
+        alt=''
+        class='scatter__item'
+        width={item.s}
+        height={item.s}
+        style={`top:${item.top}%;${item.left != null ? `left:${item.left}%` : `right:${item.right}%`};transform:rotate(${item.r}deg)`}
+      />
+    ))
+  }
+</div>
+
+<style is:global>
+  .scatter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+    display: none;
+  }
+
+  .scatter__item {
+    position: absolute;
+    opacity: 0.1;
+  }
+
+  @media (min-width: 48rem) {
+    .scatter {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  function syncScatterHeight() {
+    const scatter = document.querySelector('.scatter') as HTMLElement;
+    if (scatter) {
+      scatter.style.height = document.documentElement.scrollHeight + 'px';
+    }
+  }
+  syncScatterHeight();
+  window.addEventListener('resize', syncScatterHeight);
+  window.addEventListener('load', syncScatterHeight);
+</script>

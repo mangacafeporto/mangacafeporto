@@ -71,17 +71,6 @@ const t = getTranslations(locale);
     aria-hidden='true'
   ></div>
 
-  <!-- Decorative illustration -->
-  <div
-    class='hero__illustration'
-    aria-hidden='true'>
-    <img
-      src='/images/illustrations/coffee-mug.svg'
-      alt=''
-      width='80'
-      height='80'
-    />
-  </div>
 </section>
 
 <style>
@@ -242,31 +231,4 @@ const t = getTranslations(locale);
     }
   }
 
-  .hero__illustration {
-    position: absolute;
-    bottom: var(--space-xl);
-    right: calc(var(--content-padding) + 2rem);
-    opacity: 0.25;
-    transform: rotate(12deg);
-    display: none;
-  }
-
-  @media (min-width: 48rem) {
-    .hero__illustration {
-      display: block;
-    }
-  }
-
-  @media (min-width: 64rem) {
-    .hero__illustration {
-      right: 12%;
-      bottom: 20%;
-      opacity: 0.3;
-    }
-
-    .hero__illustration img {
-      width: 120px;
-      height: 120px;
-    }
-  }
 </style>

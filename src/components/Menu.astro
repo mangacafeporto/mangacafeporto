@@ -9,46 +9,48 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 ---
 
-<section id="menu" class="menu" aria-labelledby="menu-title">
-  <div class="menu__inner container">
-    <!-- Scattered illustrations -->
-    <img src="/images/illustrations/coffee-mug.svg" alt="" class="menu__deco menu__deco--1" aria-hidden="true" width="32" height="32" />
-    <img src="/images/illustrations/onigiri.svg" alt="" class="menu__deco menu__deco--2" aria-hidden="true" width="40" height="40" />
-    <div class="menu__header reveal">
-      <h2 id="menu-title" class="menu__title">{t.menu.title}</h2>
-      <span class="jp-accent">{t.menu.jp}</span>
-      <img src="/images/illustrations/sake-bottle.svg" alt="" class="menu__illustration" aria-hidden="true" width="48" height="48" />
+<section
+  id='menu'
+  class='menu'
+  aria-labelledby='menu-title'>
+  <div class='menu__inner container'>
+
+    <div class='menu__header reveal'>
+      <h2
+        id='menu-title'
+        class='menu__title'
+        >{t.menu.title}</h2
+      >
+      <span class='jp-accent'>{t.menu.jp}</span>
+
     </div>
 
-    <div class="menu__grid">
-      <div class="menu__group menu__group--included reveal">
-        <h3 class="menu__group-title menu__group-title--blue">{t.menu.included_title}</h3>
-        <ul class="menu__items">
-          {t.menu.included_items.map((item: string) => (
-            <li class="menu__item">{item}</li>
-          ))}
+    <div class='menu__grid'>
+      <div class='menu__group menu__group--included reveal'>
+        <h3 class='menu__group-title menu__group-title--blue'>{t.menu.included_title}</h3>
+        <ul class='menu__items'>
+          {t.menu.included_items.map((item: string) => <li class='menu__item'>{item}</li>)}
         </ul>
       </div>
 
-      <div class="menu__group menu__group--available reveal">
-        <h3 class="menu__group-title">{t.menu.available_title}</h3>
-        <ul class="menu__items">
-          {t.menu.available_items.map((item: string) => (
-            <li class="menu__item">{item}</li>
-          ))}
+      <div class='menu__group menu__group--available reveal'>
+        <h3 class='menu__group-title'>{t.menu.available_title}</h3>
+        <ul class='menu__items'>
+          {t.menu.available_items.map((item: string) => <li class='menu__item'>{item}</li>)}
         </ul>
       </div>
 
-      <div class="menu__group menu__group--occasional reveal">
-        <h3 class="menu__group-title menu__group-title--blue">{t.menu.occasional_title}</h3>
-        <p class="menu__occasional-text">
+      <div class='menu__group menu__group--occasional reveal'>
+        <h3 class='menu__group-title menu__group-title--blue'>{t.menu.occasional_title}</h3>
+        <p class='menu__occasional-text'>
           {t.menu.occasional_text_before}
           <a
-            href="https://www.instagram.com/once.upon.a.bagel_aino"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-animated"
-          >@once.upon.a.bagel_aino</a>
+            href='https://www.instagram.com/once.upon.a.bagel_aino'
+            target='_blank'
+            rel='noopener noreferrer'
+            class='link-animated'
+            >@once.upon.a.bagel_aino</a
+          >
         </p>
       </div>
     </div>
@@ -65,19 +67,6 @@ const t = getTranslations(locale);
     flex-direction: column;
     gap: var(--space-xl);
     position: relative;
-  }
-
-  .menu__deco {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
-    display: none;
-  }
-
-  @media (min-width: 48rem) {
-    .menu__deco { display: block; }
-    .menu__deco--1 { bottom: 20%; left: -2%; transform: rotate(-15deg); }
-    .menu__deco--2 { top: 35%; right: 3%; transform: rotate(10deg); }
   }
 
   .menu__header {
@@ -132,12 +121,6 @@ const t = getTranslations(locale);
 
   .menu__group-title--blue {
     color: var(--color-cobalt);
-  }
-
-  .menu__illustration {
-    opacity: 0.35;
-    transform: rotate(-8deg);
-    margin-left: auto;
   }
 
   .menu__items {

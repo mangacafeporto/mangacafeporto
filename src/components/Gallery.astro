@@ -10,49 +10,49 @@ const t = getTranslations(locale);
 
 // Gallery photos
 const galleryPhotos = [
-  { src: '/images/space-1.jpg', rotate: -2.5, large: true },
-  { src: '/images/space-2.jpg', rotate: 3.0,  large: false },
+  { src: '/images/space-8.jpg', rotate: -2.5, large: true },
+  { src: '/images/space-7.jpg', rotate: 3.0, large: false },
   { src: '/images/space-3.jpg', rotate: -1.5, large: false },
-  { src: '/images/space-4.jpg', rotate: 2.5,  large: false },
+  { src: '/images/space-4.jpg', rotate: 2.5, large: false },
   { src: '/images/space-5.jpg', rotate: -3.0, large: false },
-  { src: '/images/space-6.jpg', rotate: 1.5,  large: true },
-  { src: '/images/space-7.jpg', rotate: -2.0, large: false },
-  { src: '/images/space-8.jpg', rotate: 3.5,  large: false },
-  { src: '/images/space-9.jpg', rotate: -1.0, large: false },
+  { src: '/images/space-6.jpg', rotate: 1.5, large: true },
+  { src: '/images/space-9.jpg', rotate: -2.0, large: false },
+  { src: '/images/space-1.jpg', rotate: 3.5, large: false },
+  { src: '/images/space-2.jpg', rotate: -1.0, large: false },
 ];
 ---
 
-<section id="gallery" class="gallery" aria-labelledby="gallery-title">
-  <div class="gallery__inner container">
-    <!-- Scattered illustrations -->
-    <img src="/images/illustrations/sake-bottle.svg" alt="" class="gallery__deco gallery__deco--1" aria-hidden="true" width="28" height="28" />
-    <img src="/images/illustrations/manga-book.svg" alt="" class="gallery__deco gallery__deco--2" aria-hidden="true" width="34" height="34" />
-    <div class="gallery__header reveal">
-      <h2 id="gallery-title" class="gallery__title">{t.gallery.title}</h2>
-      <span class="jp-accent">{t.gallery.jp}</span>
-      <img src="/images/illustrations/coffee-mug.svg" alt="" class="gallery__illustration" aria-hidden="true" width="44" height="44" />
+<section
+  id='gallery'
+  class='gallery'
+  aria-labelledby='gallery-title'>
+  <div class='gallery__inner container'>
+    <div class='gallery__header reveal'>
+      <h2
+        id='gallery-title'
+        class='gallery__title'
+        >{t.gallery.title}</h2
+      >
+      <span class='jp-accent'>{t.gallery.jp}</span>
     </div>
 
-    <div class="gallery__grid">
-      {galleryPhotos.map((photo) => (
-        <div
-          class:list={[
-            'gallery__item',
-            photo.large && 'gallery__item--large',
-            'reveal',
-          ]}
-          style={`--rotate: ${photo.rotate}deg`}
-        >
-          <div class="gallery__photo">
-            <img
-              src={photo.src}
-              alt="Manga Café Porto"
-              loading="lazy"
-              decoding="async"
-            />
+    <div class='gallery__grid'>
+      {
+        galleryPhotos.map(photo => (
+          <div
+            class:list={['gallery__item', photo.large && 'gallery__item--large', 'reveal']}
+            style={`--rotate: ${photo.rotate}deg`}>
+            <div class='gallery__photo'>
+              <img
+                src={photo.src}
+                alt='Manga Café Porto'
+                loading='lazy'
+                decoding='async'
+              />
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
@@ -60,7 +60,6 @@ const galleryPhotos = [
 <style>
   .gallery {
     border-top: var(--border-thin) solid var(--color-crimson);
-    overflow: hidden;
     padding-top: var(--space-md);
   }
 
@@ -69,19 +68,6 @@ const galleryPhotos = [
     flex-direction: column;
     gap: var(--space-lg);
     position: relative;
-  }
-
-  .gallery__deco {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
-    display: none;
-  }
-
-  @media (min-width: 48rem) {
-    .gallery__deco { display: block; }
-    .gallery__deco--1 { top: 50%; right: 1%; transform: rotate(-18deg); }
-    .gallery__deco--2 { bottom: 10%; left: 2%; transform: rotate(14deg); }
   }
 
   .gallery__header {
@@ -94,12 +80,6 @@ const galleryPhotos = [
     color: var(--color-crimson);
   }
 
-  .gallery__illustration {
-    opacity: 0.3;
-    transform: rotate(4deg);
-    margin-left: auto;
-  }
-
   /* Mobile: 2-col grid */
   .gallery__grid {
     display: grid;
@@ -109,15 +89,16 @@ const galleryPhotos = [
 
   .gallery__item {
     transform: rotate(var(--rotate, 0deg));
-    transition: transform var(--duration-normal) var(--ease-out),
-                box-shadow var(--duration-normal) var(--ease-out);
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out);
     cursor: pointer;
     position: relative;
   }
 
   @media (hover: hover) {
     .gallery__item:hover {
-      transform: rotate(0deg) scale(1.15);
+      transform: rotate(0deg) scale(1.3);
       z-index: 20;
     }
 
@@ -125,12 +106,13 @@ const galleryPhotos = [
       border-color: var(--color-text);
       border-width: 2px;
       box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
+      aspect-ratio: auto;
     }
   }
 
-  /* Touch tap feedback */
+  /* Touch tap feedback — keep simple on mobile (no aspect-ratio change) */
   .gallery__item:active {
-    transform: rotate(0deg) scale(1.1);
+    transform: rotate(0deg) scale(1.05);
     z-index: 20;
   }
 
@@ -145,6 +127,8 @@ const galleryPhotos = [
     overflow: hidden;
     box-shadow: 2px 3px 8px rgba(42, 33, 24, 0.12);
     transition: box-shadow var(--duration-normal) var(--ease-out);
+    position: relative;
+    background-color: var(--color-cream);
   }
 
   .gallery__photo img {
@@ -194,15 +178,69 @@ const galleryPhotos = [
     }
 
     /* Mosaic-inspired scattered positions — photos overlap at edges */
-    .gallery__item:nth-child(1) { top: 0%; left: 0%;  width: 28%; height: 52%; z-index: 2; }
-    .gallery__item:nth-child(2) { top: 0%; left: 26%; width: 42%; height: 38%; z-index: 1; }
-    .gallery__item:nth-child(3) { top: 0%; left: 70%; width: 30%; height: 52%; z-index: 3; }
-    .gallery__item:nth-child(4) { top: 35%; left: 24%; width: 25%; height: 35%; z-index: 4; }
-    .gallery__item:nth-child(5) { top: 35%; left: 47%; width: 25%; height: 35%; z-index: 2; }
-    .gallery__item:nth-child(6) { top: 50%; left: -1%; width: 28%; height: 38%; z-index: 3; }
-    .gallery__item:nth-child(7) { top: 50%; left: 73%; width: 28%; height: 38%; z-index: 1; }
-    .gallery__item:nth-child(8) { top: 70%; left: 3%;  width: 45%; height: 30%; z-index: 5; }
-    .gallery__item:nth-child(9) { top: 70%; left: 50%; width: 48%; height: 30%; z-index: 4; }
+    .gallery__item:nth-child(1) {
+      top: 0%;
+      left: 0%;
+      width: 28%;
+      height: 52%;
+      z-index: 2;
+    }
+    .gallery__item:nth-child(2) {
+      top: 0%;
+      left: 26%;
+      width: 42%;
+      height: 38%;
+      z-index: 1;
+    }
+    .gallery__item:nth-child(3) {
+      top: 0%;
+      left: 70%;
+      width: 30%;
+      height: 52%;
+      z-index: 3;
+    }
+    .gallery__item:nth-child(4) {
+      top: 35%;
+      left: 24%;
+      width: 25%;
+      height: 35%;
+      z-index: 4;
+    }
+    .gallery__item:nth-child(5) {
+      top: 35%;
+      left: 47%;
+      width: 25%;
+      height: 35%;
+      z-index: 2;
+    }
+    .gallery__item:nth-child(6) {
+      top: 50%;
+      left: -1%;
+      width: 28%;
+      height: 38%;
+      z-index: 3;
+    }
+    .gallery__item:nth-child(7) {
+      top: 50%;
+      left: 73%;
+      width: 28%;
+      height: 38%;
+      z-index: 1;
+    }
+    .gallery__item:nth-child(8) {
+      top: 70%;
+      left: 3%;
+      width: 45%;
+      height: 30%;
+      z-index: 5;
+    }
+    .gallery__item:nth-child(9) {
+      top: 70%;
+      left: 50%;
+      width: 48%;
+      height: 30%;
+      z-index: 4;
+    }
 
     /* Must come after nth-child rules to win specificity */
     @media (hover: hover) {

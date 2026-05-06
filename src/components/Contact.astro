@@ -9,7 +9,7 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 
 const mapSrc =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1502.2!2d-8.6198!3d41.1533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2464e2f3c5be53%3A0x0!2sR.%20de%20Cedofeita%20170%2C%204050-173%20Porto!5e0!3m2!1spt!2spt';
+  'https://maps.google.com/maps?width=600&height=400&hl=en&q=Manga%20Caf%C3%A9%20Porto&t=&z=15&ie=UTF8&iwloc=B&output=embed';
 ---
 
 <section
@@ -17,9 +17,6 @@ const mapSrc =
   class='contact'
   aria-labelledby='contact-title'>
   <div class='contact__inner container'>
-    <!-- Scattered illustrations -->
-    <img src='/images/illustrations/sake-bottle.svg' alt='' class='contact__deco contact__deco--1' aria-hidden='true' width='30' height='30' />
-    <img src='/images/illustrations/onigiri.svg' alt='' class='contact__deco contact__deco--2' aria-hidden='true' width='36' height='36' />
     <div class='contact__header reveal'>
       <h2
         id='contact-title'
@@ -27,7 +24,6 @@ const mapSrc =
         >{t.contact.title}</h2
       >
       <span class='jp-accent'>{t.contact.jp}</span>
-      <img src='/images/illustrations/manga-book.svg' alt='' class='contact__illustration' aria-hidden='true' width='44' height='44' />
     </div>
 
     <div class='contact__content'>
@@ -82,19 +78,6 @@ const mapSrc =
     position: relative;
   }
 
-  .contact__deco {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
-    display: none;
-  }
-
-  @media (min-width: 48rem) {
-    .contact__deco { display: block; }
-    .contact__deco--1 { top: 20%; right: 0%; transform: rotate(16deg); }
-    .contact__deco--2 { bottom: 15%; left: 3%; transform: rotate(-10deg); }
-  }
-
   .contact__header {
     display: flex;
     align-items: baseline;
@@ -103,12 +86,6 @@ const mapSrc =
 
   .contact__title {
     color: var(--color-crimson);
-  }
-
-  .contact__illustration {
-    opacity: 0.3;
-    transform: rotate(-5deg);
-    margin-left: auto;
   }
 
   .contact__content {

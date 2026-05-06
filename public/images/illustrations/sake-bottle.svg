@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Sake bottle (tokkuri) — naive hand-drawn style -->
-  <path d="M32 14 C32 12, 34 10, 36 10 L44 10 C46 10, 48 12, 48 14 L48 22 C54 26, 56 32, 56 40 L56 62 C56 66, 52 70, 46 70 L34 70 C28 70, 24 66, 24 62 L24 40 C24 32, 26 26, 32 22 Z" stroke="#C8302C" stroke-width="2.5"/>
-  <!-- Sake level line -->
-  <path d="M28 48 L52 48" stroke="#C8302C" stroke-width="1.5" opacity="0.4" stroke-dasharray="3 3"/>
-  <!-- Small decoration -->
-  <circle cx="40" cy="36" r="3" stroke="#C8302C" stroke-width="1.5" opacity="0.5"/>
-</svg>

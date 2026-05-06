@@ -4,6 +4,7 @@ import { type Locale, getTranslations, getAlternateLocale, getLocalePath } from 
 import Navigation from '../components/Navigation.astro';
 import LangToggle from '../components/LangToggle.astro';
 import Footer from '../components/Footer.astro';
+import ScatteredIllustrations from '../components/ScatteredIllustrations.astro';
 
 interface Props {
   locale: Locale;
@@ -46,15 +47,19 @@ const altUrl = getLocalePath(altLocale);
     <link rel="apple-touch-icon" href="/favicon.png" />
   </head>
   <body>
-    <a href="#hero" class="sr-only">Skip to content</a>
-    <LangToggle locale={locale} altLocale={altLocale} altUrl={altUrl} />
-    <Navigation locale={locale} />
+    <div class="page">
+      <a href="#hero" class="sr-only">Skip to content</a>
+      <LangToggle locale={locale} altLocale={altLocale} altUrl={altUrl} />
+      <Navigation locale={locale} />
 
-    <main>
-      <slot />
-    </main>
+      <main>
+        <slot />
+      </main>
 
-    <Footer locale={locale} />
+      <Footer locale={locale} />
+
+      <ScatteredIllustrations />
+    </div>
 
     <!-- Scroll reveal observer -->
     <script>

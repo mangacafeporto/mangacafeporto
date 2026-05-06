@@ -9,38 +9,54 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 ---
 
-<section id="library" class="library" aria-labelledby="library-title">
-  <div class="library__inner container">
-    <!-- Scattered illustrations -->
-    <img src="/images/illustrations/sake-cups.svg" alt="" class="library__deco library__deco--1" aria-hidden="true" width="34" height="34" />
-    <img src="/images/illustrations/sake-bottle.svg" alt="" class="library__deco library__deco--2" aria-hidden="true" width="30" height="30" />
-    <div class="library__header reveal">
-      <h2 id="library-title" class="library__title">{t.library.title}</h2>
-      <span class="jp-accent">{t.library.jp}</span>
-      <img src="/images/illustrations/manga-book.svg" alt="" class="library__illustration" aria-hidden="true" width="48" height="48" />
+<section
+  id='library'
+  class='library'
+  aria-labelledby='library-title'>
+  <div class='library__inner container'>
+
+    <div class='library__header reveal'>
+      <h2
+        id='library-title'
+        class='library__title'
+        >{t.library.title}</h2
+      >
+      <span class='jp-accent'>{t.library.jp}</span>
+
     </div>
 
-    <p class="library__desc reveal">{t.library.description}</p>
+    <p class='library__desc reveal'>{t.library.description}</p>
 
     <!-- Manga highlights -->
-    <div class="library__highlights reveal">
-      {t.library.highlights.map((title: string, i: number) => (
-        <span
-          class="library__manga-title"
-          style={`--rotate: ${(i % 2 === 0 ? -1 : 1) * (1 + i * 0.5)}deg`}
-        >
-          {title}
-        </span>
-      ))}
+    <div class='library__highlights reveal'>
+      {
+        t.library.highlights.map((title: string, i: number) => (
+          <span
+            class='library__manga-title'
+            style={`--rotate: ${(i % 2 === 0 ? -1 : 1) * (1 + i * 0.5)}deg`}>
+            {title}
+          </span>
+        ))
+      }
     </div>
 
     <!-- Shelf photos -->
-    <div class="library__photos reveal">
-      <div class="library__photo library__photo--1">
-        <img src="/images/shelves-1.jpg" alt={locale === 'pt' ? 'Prateleira de manga' : 'Manga shelf'} loading="lazy" decoding="async" />
+    <div class='library__photos reveal'>
+      <div class='library__photo library__photo--1'>
+        <img
+          src='/images/shelves-1.jpg'
+          alt={locale === 'pt' ? 'Prateleira de manga' : 'Manga shelf'}
+          loading='lazy'
+          decoding='async'
+        />
       </div>
-      <div class="library__photo library__photo--2">
-        <img src="/images/shelves-2.jpg" alt={locale === 'pt' ? 'Volumes de manga' : 'Manga volumes'} loading="lazy" decoding="async" />
+      <div class='library__photo library__photo--2'>
+        <img
+          src='/images/shelves-2.jpg'
+          alt={locale === 'pt' ? 'Volumes de manga' : 'Manga volumes'}
+          loading='lazy'
+          decoding='async'
+        />
       </div>
     </div>
   </div>
@@ -59,19 +75,6 @@ const t = getTranslations(locale);
     position: relative;
   }
 
-  .library__deco {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
-    display: none;
-  }
-
-  @media (min-width: 48rem) {
-    .library__deco { display: block; }
-    .library__deco--1 { top: 25%; right: 1%; transform: rotate(18deg); }
-    .library__deco--2 { bottom: 25%; left: 5%; transform: rotate(-12deg); }
-  }
-
   .library__header {
     display: flex;
     align-items: baseline;
@@ -80,12 +83,6 @@ const t = getTranslations(locale);
 
   .library__title {
     color: var(--color-crimson);
-  }
-
-  .library__illustration {
-    opacity: 0.35;
-    transform: rotate(5deg);
-    margin-left: auto;
   }
 
   .library__desc {
@@ -160,9 +157,10 @@ const t = getTranslations(locale);
   }
 
   .library__photo {
-    transition: transform var(--duration-normal) var(--ease-out),
-                box-shadow var(--duration-normal) var(--ease-out),
-                border-color var(--duration-normal) var(--ease-out);
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out),
+      border-color var(--duration-normal) var(--ease-out);
     cursor: pointer;
   }
 

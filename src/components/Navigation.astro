@@ -78,37 +78,32 @@ const sections = [
   // Active section tracking — highlight the tab whose section is most prominent
   const navSections = document.querySelectorAll('section[id]');
   const tabs = document.querySelectorAll('.book-tab');
-  const visibleSections = new Set<string>();
 
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visibleSections.add(entry.target.id);
-        } else {
-          visibleSections.delete(entry.target.id);
-        }
+  function updateActiveSection() {
+    let activeId = '';
+
+    // Pick the last section whose top has scrolled past 40% of the viewport
+    const cutoff = window.innerHeight * 0.4;
+    for (const section of navSections) {
+      if (section.getBoundingClientRect().top <= cutoff) {
+        activeId = section.id;
+      }
+    }
+
+    // At the very bottom of the page, always activate the last section
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 50) {
+      activeId = navSections[navSections.length - 1].id;
+    }
+
+    if (activeId) {
+      tabs.forEach((tab) => {
+        tab.classList.toggle('active', tab.getAttribute('data-section') === activeId);
       });
+    }
+  }
 
-      // Activate the first visible section in DOM order
-      let activeId = '';
-      for (const section of navSections) {
-        if (visibleSections.has(section.id)) {
-          activeId = section.id;
-          break;
-        }
-      }
-
-      if (activeId) {
-        tabs.forEach((tab) => {
-          tab.classList.toggle('active', tab.getAttribute('data-section') === activeId);
-        });
-      }
-    },
-    { threshold: 0, rootMargin: '-20% 0px -60% 0px' }
-  );
-
-  navSections.forEach((section) => sectionObserver.observe(section));
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  updateActiveSection();
 </script>
 
 <style>

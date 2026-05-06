@@ -9,24 +9,32 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 ---
 
-<section id="pricing" class="pricing" aria-labelledby="pricing-title">
-  <div class="pricing__inner container">
-    <!-- Scattered illustrations -->
-    <img src="/images/illustrations/onigiri.svg" alt="" class="pricing__deco pricing__deco--1" aria-hidden="true" width="36" height="36" />
-    <img src="/images/illustrations/coffee-mug.svg" alt="" class="pricing__deco pricing__deco--2" aria-hidden="true" width="28" height="28" />
-    <div class="pricing__header reveal">
-      <h2 id="pricing-title" class="pricing__title">{t.pricing.title}</h2>
-      <span class="jp-accent">{t.pricing.jp}</span>
-      <img src="/images/illustrations/sake-cups.svg" alt="" class="pricing__illustration" aria-hidden="true" width="44" height="44" />
-      <span class="pricing__note">{t.pricing.paid_at_cafe}</span>
+<section
+  id='pricing'
+  class='pricing'
+  aria-labelledby='pricing-title'>
+  <div class='pricing__inner container'>
+
+    <div class='pricing__header reveal'>
+      <h2
+        id='pricing-title'
+        class='pricing__title'
+        >{t.pricing.title}</h2
+      >
+      <span class='jp-accent'>{t.pricing.jp}</span>
+
+      <div class='pricing__notes'>
+        <span class='pricing__note'>{t.pricing.paid_at_cafe}</span>
+        <p class='pricing__includes'>{t.pricing.includes}</p>
+      </div>
     </div>
 
     <!-- Drop-in pricing -->
-    <div class="pricing__dropin reveal">
-      <div class="pricing__card pricing__card--dropin">
-        <h3 class="pricing__card-title">{t.pricing.drop_in_title}</h3>
-        <div class="pricing__card-price">{t.pricing.per_hour}</div>
-        <ul class="pricing__card-details">
+    <div class='pricing__dropin reveal'>
+      <div class='pricing__card pricing__card--dropin'>
+        <h3 class='pricing__card-title'>{t.pricing.drop_in_title}</h3>
+        <div class='pricing__card-price'>{t.pricing.per_hour}</div>
+        <ul class='pricing__card-details'>
           <li>{t.pricing.pack_3h}</li>
           <li>{t.pricing.extension}</li>
         </ul>
@@ -34,31 +42,26 @@ const t = getTranslations(locale);
     </div>
 
     <!-- Membership tiers -->
-    <div class="pricing__tiers">
-      <div class="pricing__card pricing__card--nomad reveal">
-        <h3 class="pricing__card-title">{t.pricing.nomad_title}</h3>
-        <p class="pricing__card-desc">{t.pricing.nomad_desc}</p>
-        <div class="pricing__card-price pricing__card-price--large">{t.pricing.nomad_price}</div>
-        <ul class="pricing__card-details">
+    <div class='pricing__tiers'>
+      <div class='pricing__card pricing__card--nomad reveal'>
+        <h3 class='pricing__card-title'>{t.pricing.nomad_title}</h3>
+        <p class='pricing__card-desc'>{t.pricing.nomad_desc}</p>
+        <div class='pricing__card-price pricing__card-price--large'>{t.pricing.nomad_price}</div>
+        <ul class='pricing__card-details'>
           <li>{t.pricing.nomad_perk}</li>
         </ul>
       </div>
 
-      <div class="pricing__card pricing__card--vip reveal">
-        <h3 class="pricing__card-title">{t.pricing.vip_title}</h3>
-        <p class="pricing__card-desc">{t.pricing.vip_desc}</p>
-        <div class="pricing__card-price pricing__card-price--large">{t.pricing.vip_price}</div>
-        <ul class="pricing__card-details">
+      <div class='pricing__card pricing__card--vip reveal'>
+        <h3 class='pricing__card-title'>{t.pricing.vip_title}</h3>
+        <p class='pricing__card-desc'>{t.pricing.vip_desc}</p>
+        <div class='pricing__card-price pricing__card-price--large'>{t.pricing.vip_price}</div>
+        <ul class='pricing__card-details'>
           <li>{t.pricing.vip_perk}</li>
         </ul>
       </div>
     </div>
 
-    <!-- Shared footnote -->
-    <div class="pricing__footnote reveal">
-      <hr class="pricing__footnote-line" />
-      <p class="pricing__footnote-text">{t.pricing.includes}</p>
-    </div>
   </div>
 </section>
 
@@ -75,32 +78,15 @@ const t = getTranslations(locale);
     position: relative;
   }
 
-  .pricing__deco {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
-    display: none;
-  }
-
-  @media (min-width: 48rem) {
-    .pricing__deco { display: block; }
-    .pricing__deco--1 { top: 40%; right: 2%; transform: rotate(12deg); }
-    .pricing__deco--2 { bottom: 15%; left: 60%; transform: rotate(-8deg); }
-  }
-
   .pricing__header {
     display: flex;
     align-items: baseline;
+    flex-wrap: wrap;
     gap: var(--space-md);
   }
 
   .pricing__title {
     color: var(--color-crimson);
-  }
-
-  .pricing__illustration {
-    opacity: 0.3;
-    transform: rotate(5deg);
   }
 
   /* Drop-in card */
@@ -159,23 +145,6 @@ const t = getTranslations(locale);
     color: var(--color-crimson);
   }
 
-  /* Shared footnote */
-  .pricing__footnote {
-    max-width: 40rem;
-  }
-
-  .pricing__footnote-line {
-    border: none;
-    border-top: var(--border-thin) solid var(--color-text-muted);
-    margin-bottom: var(--space-sm);
-  }
-
-  .pricing__footnote-text {
-    font-size: var(--text-sm);
-    color: var(--color-text-light);
-    font-style: italic;
-  }
-
   /* Membership tiers grid */
   .pricing__tiers {
     display: grid;
@@ -198,10 +167,20 @@ const t = getTranslations(locale);
     border-width: var(--border-thick);
   }
 
+  .pricing__notes {
+    flex-basis: 100%;
+  }
+
   .pricing__note {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
     font-style: italic;
-    margin-left: auto;
+  }
+
+  .pricing__includes {
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    font-style: italic;
+    margin-top: var(--space-xs);
   }
 </style>
