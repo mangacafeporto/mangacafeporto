@@ -87,8 +87,8 @@ const galleryPhotos = [
     }
 
     .gallery__item:hover .gallery__photo {
-      border-color: var(--color-text);
-      border-width: 2px;
+      border-color: var(--color-cobalt);
+      border-width: var(--border-thick);
       box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
       aspect-ratio: auto;
     }
@@ -101,7 +101,8 @@ const galleryPhotos = [
   }
 
   .gallery__item:active .gallery__photo {
-    border-color: var(--color-text);
+    border-color: var(--color-cobalt);
+    border-width: var(--border-thick);
     box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
   }
 

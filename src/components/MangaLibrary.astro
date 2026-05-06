@@ -151,8 +151,8 @@ const t = getTranslations(locale);
     .library__photo:hover {
       transform: rotate(0deg) scale(1.15);
       z-index: 20;
-      border-color: var(--color-text);
-      border-width: 2px;
+      border-color: var(--color-cobalt);
+      border-width: var(--border-thick);
       box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
     }
   }
@@ -161,7 +161,8 @@ const t = getTranslations(locale);
   .library__photo:active {
     transform: rotate(0deg) scale(1.1);
     z-index: 20;
-    border-color: var(--color-text);
+    border-color: var(--color-cobalt);
+    border-width: var(--border-thick);
     box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
   }
 </style>

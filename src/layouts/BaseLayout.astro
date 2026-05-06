@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { type Locale, getTranslations, getAlternateLocale, getLocalePath } from '../i18n';
+import { ClientRouter } from 'astro:transitions';
 import Navigation from '../components/Navigation.astro';
 import LangToggle from '../components/LangToggle.astro';
 import Footer from '../components/Footer.astro';
@@ -45,6 +46,21 @@ const altUrl = getLocalePath(altLocale);
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="180x180" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Prevent Astro's scroll restoration on refresh (runs before router module) -->
+    <script is:inline>
+      if (history.state && history.state.scrollX != null) {
+        history.replaceState({ ...history.state, scrollX: 0, scrollY: 0 }, '');
+      }
+      if (location.hash) {
+        document.addEventListener('DOMContentLoaded', function() {
+          var el = document.querySelector(location.hash);
+          if (el) el.scrollIntoView();
+        });
+      }
+    </script>
+
+    <ClientRouter />
   </head>
   <body>
     <div class="page">
@@ -63,19 +79,66 @@ const altUrl = getLocalePath(altLocale);
 
     <!-- Scroll reveal observer -->
     <script>
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-      );
+      function initReveal() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      }
 
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      initReveal();
+      document.addEventListener('astro:after-swap', initReveal);
+    </script>
+
+    <!-- Preserve scroll position on language switch -->
+    <script>
+      import { navigate } from 'astro:transitions/client';
+
+      function attachLangScrollSave() {
+        document.querySelectorAll('.lang-option:not(.active)').forEach((link) => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const baseHref = (link as HTMLAnchorElement).href.split('#')[0];
+            const docHeight = document.documentElement.scrollHeight;
+            const ratio = docHeight > window.innerHeight
+              ? window.scrollY / (docHeight - window.innerHeight)
+              : 0;
+            // Find the current active section for the URL hash
+            const activeTab = document.querySelector('.book-tab.active');
+            const sectionId = activeTab?.getAttribute('data-section') || '';
+            sessionStorage.setItem('langSwitchRatio', String(ratio));
+            if (sectionId) sessionStorage.setItem('langSwitchHash', sectionId);
+            // Navigate without hash to avoid Astro's anchor scrolling
+            navigate(baseHref);
+          });
+        });
+      }
+
+      attachLangScrollSave();
+      document.addEventListener('astro:after-swap', () => {
+        attachLangScrollSave();
+        const ratio = sessionStorage.getItem('langSwitchRatio');
+        if (ratio !== null) {
+          sessionStorage.removeItem('langSwitchRatio');
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const target = Math.round(parseFloat(ratio) * maxScroll);
+          window.scrollTo({ left: 0, top: target, behavior: 'instant' });
+          // Add the section hash back to the URL without scrolling
+          const hash = sessionStorage.getItem('langSwitchHash');
+          if (hash) {
+            sessionStorage.removeItem('langSwitchHash');
+            history.replaceState(history.state, '', location.pathname + '#' + hash);
+          }
+        }
+      });
     </script>
   </body>
 </html>

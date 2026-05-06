@@ -7,10 +7,10 @@
   "nav": {
     "pricing": "Preços",
     "menu": "Menu",
-    "library": "Biblioteca",
+    "library": "Manga",
     "events": "Eventos",
-    "gallery": "Galeria",
-    "contact": "Contacto"
+    "gallery": "O Espaço",
+    "contact": "Visita-nos"
   },
   "hero": {
     "location_label": "Localização",

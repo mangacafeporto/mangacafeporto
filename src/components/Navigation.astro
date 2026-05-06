@@ -56,54 +56,59 @@ const sections = [
 </div>
 
 <script>
-  const trigger = document.querySelector('.hanko-trigger');
-  const links = document.querySelector('.hanko-links');
+  function initNavigation() {
+    const trigger = document.querySelector('.hanko-trigger');
+    const links = document.querySelector('.hanko-links');
 
-  trigger?.addEventListener('click', () => {
-    const expanded = trigger.getAttribute('aria-expanded') === 'true';
-    trigger.setAttribute('aria-expanded', String(!expanded));
-    links?.setAttribute('aria-hidden', String(expanded));
-    document.body.classList.toggle('menu-open', !expanded);
-  });
-
-  // Close menu on link click
-  links?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      trigger?.setAttribute('aria-expanded', 'false');
-      links?.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('menu-open');
+    trigger?.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      links?.setAttribute('aria-hidden', String(expanded));
+      document.body.classList.toggle('menu-open', !expanded);
     });
-  });
 
-  // Active section tracking — highlight the tab whose section is most prominent
-  const navSections = document.querySelectorAll('section[id]');
-  const tabs = document.querySelectorAll('.book-tab');
+    // Close menu on link click
+    links?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        trigger?.setAttribute('aria-expanded', 'false');
+        links?.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('menu-open');
+      });
+    });
 
-  function updateActiveSection() {
-    let activeId = '';
+    // Active section tracking — highlight the tab whose section is most prominent
+    const navSections = document.querySelectorAll('section[id]');
+    const tabs = document.querySelectorAll('.book-tab');
 
-    // Pick the last section whose top has scrolled past 40% of the viewport
-    const cutoff = window.innerHeight * 0.4;
-    for (const section of navSections) {
-      if (section.getBoundingClientRect().top <= cutoff) {
-        activeId = section.id;
+    function updateActiveSection() {
+      let activeId = '';
+
+      // Pick the last section whose top has scrolled past 40% of the viewport
+      const cutoff = window.innerHeight * 0.4;
+      for (const section of navSections) {
+        if (section.getBoundingClientRect().top <= cutoff) {
+          activeId = section.id;
+        }
+      }
+
+      // At the very bottom of the page, always activate the last section
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 50) {
+        activeId = navSections[navSections.length - 1].id;
+      }
+
+      if (activeId) {
+        tabs.forEach((tab) => {
+          tab.classList.toggle('active', tab.getAttribute('data-section') === activeId);
+        });
       }
     }
 
-    // At the very bottom of the page, always activate the last section
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 50) {
-      activeId = navSections[navSections.length - 1].id;
-    }
-
-    if (activeId) {
-      tabs.forEach((tab) => {
-        tab.classList.toggle('active', tab.getAttribute('data-section') === activeId);
-      });
-    }
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    updateActiveSection();
   }
 
-  window.addEventListener('scroll', updateActiveSection, { passive: true });
-  updateActiveSection();
+  initNavigation();
+  document.addEventListener('astro:after-swap', initNavigation);
 </script>
 
 <style>
