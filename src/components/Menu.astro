@@ -1,5 +1,6 @@
 ---
 import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   locale: Locale;
@@ -15,15 +16,7 @@ const t = getTranslations(locale);
   aria-labelledby='menu-title'>
   <div class='menu__inner container'>
 
-    <div class='menu__header reveal'>
-      <h2
-        id='menu-title'
-        class='menu__title'
-        >{t.menu.title}</h2
-      >
-      <span class='jp-accent'>{t.menu.jp}</span>
-
-    </div>
+    <SectionHeader id='menu-title' title={t.menu.title} jp={t.menu.jp} />
 
     <div class='menu__grid'>
       <div class='menu__group menu__group--included reveal'>
@@ -67,16 +60,6 @@ const t = getTranslations(locale);
     flex-direction: column;
     gap: var(--space-xl);
     position: relative;
-  }
-
-  .menu__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-  }
-
-  .menu__title {
-    color: var(--color-crimson);
   }
 
   .menu__grid {

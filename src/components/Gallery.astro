@@ -1,5 +1,6 @@
 ---
 import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   locale: Locale;
@@ -27,14 +28,7 @@ const galleryPhotos = [
   class='gallery'
   aria-labelledby='gallery-title'>
   <div class='gallery__inner container'>
-    <div class='gallery__header reveal'>
-      <h2
-        id='gallery-title'
-        class='gallery__title'
-        >{t.gallery.title}</h2
-      >
-      <span class='jp-accent'>{t.gallery.jp}</span>
-    </div>
+    <SectionHeader id='gallery-title' title={t.gallery.title} jp={t.gallery.jp} />
 
     <div class='gallery__grid'>
       {
@@ -68,16 +62,6 @@ const galleryPhotos = [
     flex-direction: column;
     gap: var(--space-lg);
     position: relative;
-  }
-
-  .gallery__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-  }
-
-  .gallery__title {
-    color: var(--color-crimson);
   }
 
   /* Mobile: 2-col grid */

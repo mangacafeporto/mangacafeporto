@@ -1,5 +1,6 @@
 ---
 import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   locale: Locale;
@@ -15,15 +16,7 @@ const t = getTranslations(locale);
   aria-labelledby='library-title'>
   <div class='library__inner container'>
 
-    <div class='library__header reveal'>
-      <h2
-        id='library-title'
-        class='library__title'
-        >{t.library.title}</h2
-      >
-      <span class='jp-accent'>{t.library.jp}</span>
-
-    </div>
+    <SectionHeader id='library-title' title={t.library.title} jp={t.library.jp} />
 
     <p class='library__desc reveal'>{t.library.description}</p>
 
@@ -73,16 +66,6 @@ const t = getTranslations(locale);
     flex-direction: column;
     gap: var(--space-xl);
     position: relative;
-  }
-
-  .library__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-  }
-
-  .library__title {
-    color: var(--color-crimson);
   }
 
   .library__desc {

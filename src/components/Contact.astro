@@ -1,5 +1,6 @@
 ---
 import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   locale: Locale;
@@ -17,36 +18,35 @@ const mapSrc =
   class='contact'
   aria-labelledby='contact-title'>
   <div class='contact__inner container'>
-    <div class='contact__header reveal'>
-      <h2
-        id='contact-title'
-        class='contact__title'
-        >{t.contact.title}</h2
-      >
-      <span class='jp-accent'>{t.contact.jp}</span>
-    </div>
+    <SectionHeader id='contact-title' title={t.contact.title} jp={t.contact.jp} />
 
     <div class='contact__content'>
       <div class='contact__info reveal'>
-        <address class='contact__address'>
-          {t.contact.address}
-        </address>
+        <div class='contact__block'>
+          <h3 class='contact__label'>{t.contact.address_label}</h3>
+          <address class='contact__address'>
+            {t.contact.address}
+          </address>
+        </div>
 
-        <div class='contact__social'>
-          <a
-            href='https://www.instagram.com/mangacafe_porto'
-            target='_blank'
-            rel='noopener noreferrer'
-            class='link-animated'>
-            Instagram
-          </a>
-          <a
-            href='https://www.facebook.com/people/MANGA-CAFE-PORTO/61578631384335/'
-            target='_blank'
-            rel='noopener noreferrer'
-            class='link-animated'>
-            Facebook
-          </a>
+        <div class='contact__block'>
+          <h3 class='contact__label'>{t.contact.socials_label}</h3>
+          <div class='contact__social'>
+            <a
+              href='https://www.instagram.com/mangacafe_porto'
+              target='_blank'
+              rel='noopener noreferrer'
+              class='link-animated'>
+              Instagram
+            </a>
+            <a
+              href='https://www.facebook.com/people/MANGA-CAFE-PORTO/61578631384335/'
+              target='_blank'
+              rel='noopener noreferrer'
+              class='link-animated'>
+              Facebook
+            </a>
+          </div>
         </div>
       </div>
 
@@ -78,16 +78,6 @@ const mapSrc =
     position: relative;
   }
 
-  .contact__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-  }
-
-  .contact__title {
-    color: var(--color-crimson);
-  }
-
   .contact__content {
     display: grid;
     gap: var(--space-xl);
@@ -104,6 +94,19 @@ const mapSrc =
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
+  }
+
+  .contact__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact__label {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-cobalt);
   }
 
   .contact__address {

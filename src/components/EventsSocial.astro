@@ -1,5 +1,6 @@
 ---
 import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   locale: Locale;
@@ -15,15 +16,7 @@ const t = getTranslations(locale);
   aria-labelledby='events-title'>
   <div class='events__inner container'>
 
-    <div class='events__header reveal'>
-      <h2
-        id='events-title'
-        class='events__title'
-        >{t.events.title}</h2
-      >
-      <span class='jp-accent'>{t.events.jp}</span>
-
-    </div>
+    <SectionHeader id='events-title' title={t.events.title} jp={t.events.jp} />
 
     <p class='events__blurb reveal'>{t.events.blurb}</p>
 
@@ -124,16 +117,6 @@ const t = getTranslations(locale);
     flex-direction: column;
     gap: var(--space-xl);
     position: relative;
-  }
-
-  .events__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-  }
-
-  .events__title {
-    color: var(--color-crimson);
   }
 
   .events__blurb {

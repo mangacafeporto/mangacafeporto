@@ -32,6 +32,7 @@
     "pack_3h": "3-hour pack — €12",
     "extension": "Extension — €5",
     "includes": "Includes: unlimited manga reading, tea & coffee",
+    "note": "All passes include unlimited manga, tea & coffee, and are paid at the café.",
     "nomad_title": "Nomad Worker — Monthly Pack",
     "nomad_desc": "Focused work & study time in a creative environment",
     "nomad_price": "€60 /month",
@@ -66,6 +67,6 @@
     "follow_cta": "Follow us for updates"
   },
   "gallery": { "title": "The Space", "jp": "空間" },
-  "contact": { "title": "Visit Us", "jp": "場所", "address": "R. de Cedofeita 170, 4050-173 Porto" },
+  "contact": { "title": "Visit Us", "jp": "場所", "address": "R. de Cedofeita 170, 4050-173 Porto", "address_label": "Address", "socials_label": "Follow Us" },
   "footer": { "copyright": "© {year} Manga Café Porto" }
 }

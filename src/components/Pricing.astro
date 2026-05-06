@@ -1,5 +1,6 @@
 ---
 import { type Locale, getTranslations } from '../i18n';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   locale: Locale;
@@ -15,29 +16,16 @@ const t = getTranslations(locale);
   aria-labelledby='pricing-title'>
   <div class='pricing__inner container'>
 
-    <div class='pricing__header reveal'>
-      <h2
-        id='pricing-title'
-        class='pricing__title'
-        >{t.pricing.title}</h2
-      >
-      <span class='jp-accent'>{t.pricing.jp}</span>
-    </div>
+    <SectionHeader id='pricing-title' title={t.pricing.title} jp={t.pricing.jp} />
 
-    <div class='pricing__notes reveal'>
-      <span class='pricing__note'>{t.pricing.paid_at_cafe}</span>
-      <p class='pricing__includes'>{t.pricing.includes}</p>
-    </div>
+    <p class='pricing__desc reveal'>{t.pricing.note}</p>
 
     <!-- Drop-in pricing -->
     <div class='pricing__dropin reveal'>
       <div class='pricing__card pricing__card--dropin'>
         <h3 class='pricing__card-title'>{t.pricing.drop_in_title}</h3>
         <div class='pricing__card-price'>{t.pricing.per_hour}</div>
-        <ul class='pricing__card-details'>
-          <li>{t.pricing.pack_3h}</li>
-          <li>{t.pricing.extension}</li>
-        </ul>
+        <p class='pricing__card-perk'>{t.pricing.pack_3h}</p>
       </div>
     </div>
 
@@ -47,18 +35,14 @@ const t = getTranslations(locale);
         <h3 class='pricing__card-title'>{t.pricing.nomad_title}</h3>
         <p class='pricing__card-desc'>{t.pricing.nomad_desc}</p>
         <div class='pricing__card-price pricing__card-price--large'>{t.pricing.nomad_price}</div>
-        <ul class='pricing__card-details'>
-          <li>{t.pricing.nomad_perk}</li>
-        </ul>
+        <p class='pricing__card-perk'>{t.pricing.nomad_perk}</p>
       </div>
 
       <div class='pricing__card pricing__card--vip reveal'>
         <h3 class='pricing__card-title'>{t.pricing.vip_title}</h3>
         <p class='pricing__card-desc'>{t.pricing.vip_desc}</p>
         <div class='pricing__card-price pricing__card-price--large'>{t.pricing.vip_price}</div>
-        <ul class='pricing__card-details'>
-          <li>{t.pricing.vip_perk}</li>
-        </ul>
+        <p class='pricing__card-perk'>{t.pricing.vip_perk}</p>
       </div>
     </div>
 
@@ -78,22 +62,10 @@ const t = getTranslations(locale);
     position: relative;
   }
 
-  .pricing__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-    align-self: flex-start;
-  }
-
-  .pricing__title {
-    color: var(--color-crimson);
-  }
-
-  .pricing__notes {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
+  .pricing__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-light);
     font-style: italic;
-    text-align: right;
   }
 
   /* Drop-in card */
@@ -126,30 +98,16 @@ const t = getTranslations(locale);
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     color: var(--color-crimson);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
   }
 
   .pricing__card-price--large {
     font-size: var(--text-3xl);
   }
 
-  .pricing__card-details {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .pricing__card-details li {
-    padding-left: 1.2em;
-    position: relative;
-  }
-
-  .pricing__card-details li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--color-crimson);
+  .pricing__card-perk {
+    color: var(--color-text-light);
+    font-style: italic;
   }
 
   /* Membership tiers grid */
@@ -172,16 +130,5 @@ const t = getTranslations(locale);
   .pricing__card--vip {
     border-color: var(--color-crimson);
     border-width: var(--border-thick);
-  }
-
-  .pricing__note {
-    display: block;
-  }
-
-  .pricing__includes {
-    color: var(--color-text-light);
-    margin-top: var(--space-xs);
-    max-width: none;
-    margin-left: auto;
   }
 </style>
