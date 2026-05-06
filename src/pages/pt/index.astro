@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import EditorialBlurb from '../../components/EditorialBlurb.astro';
+import Pricing from '../../components/Pricing.astro';
+import Menu from '../../components/Menu.astro';
+import MangaLibrary from '../../components/MangaLibrary.astro';
+import EventsSocial from '../../components/EventsSocial.astro';
+import Gallery from '../../components/Gallery.astro';
+import Contact from '../../components/Contact.astro';
+
+const locale = 'pt' as const;
+---
+
+<BaseLayout locale={locale}>
+  <Hero locale={locale} />
+  <EditorialBlurb locale={locale} />
+  <Pricing locale={locale} />
+  <Menu locale={locale} />
+  <MangaLibrary locale={locale} />
+  <EventsSocial locale={locale} />
+  <Gallery locale={locale} />
+  <Contact locale={locale} />
+</BaseLayout>

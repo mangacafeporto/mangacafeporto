@@ -1,0 +1,272 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section
+  id='hero'
+  class='hero'
+  aria-label={locale === 'pt' ? 'Início' : 'Home'}>
+  <div class='hero__inner container'>
+    <div class='hero__logo'>
+      <img
+        src='/images/logo.png'
+        alt='Manga Café Porto'
+        class='hero__logo-img'
+        width='140'
+        height='140'
+      />
+    </div>
+
+    <div class='hero__text'>
+      <h1 class='hero__title'>Manga Café Porto</h1>
+      <p class='hero__descriptor'>{t.site.descriptor}</p>
+    </div>
+
+    <div class='hero__info'>
+      <div class='hero__hours'>
+        <span class='hero__info-label'>{t.hero.hours_label}</span>
+        <span>{t.hero.hours_tue_sun}</span>
+        <span>{t.hero.hours_mon}</span>
+      </div>
+      <div
+        class='hero__divider'
+        aria-hidden='true'
+      ></div>
+      <div class='hero__hours'>
+        <span class='hero__info-label'>{t.hero.location_label}</span>
+        <address class='hero__address'>
+          {t.hero.address}
+        </address>
+      </div>
+    </div>
+
+    <div class='hero__ctas'>
+      <a
+        href='#contact'
+        class='btn btn-primary hero__cta'
+        >{t.hero.cta_visit}</a
+      >
+      <a
+        href='#pricing'
+        class='btn btn-secondary hero__cta'
+        >{t.hero.cta}</a
+      >
+    </div>
+  </div>
+
+  <!-- Decorative corner marks -->
+  <div
+    class='hero__corner hero__corner--tl'
+    aria-hidden='true'
+  ></div>
+  <div
+    class='hero__corner hero__corner--br'
+    aria-hidden='true'
+  ></div>
+
+  <!-- Decorative illustration -->
+  <div
+    class='hero__illustration'
+    aria-hidden='true'>
+    <img
+      src='/images/illustrations/coffee-mug.svg'
+      alt=''
+      width='80'
+      height='80'
+    />
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-2xl);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  .hero__logo {
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  @media (min-width: 40rem) {
+    .hero__logo {
+      width: 220px;
+      height: 220px;
+    }
+  }
+
+  .hero__logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: var(--text-4xl);
+    color: var(--color-crimson);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__descriptor {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    color: var(--color-text-light);
+    font-style: italic;
+    max-width: 40ch;
+  }
+
+  .hero__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  @media (min-width: 40rem) {
+    .hero__info {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-lg);
+    }
+  }
+
+  .hero__hours {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+  }
+
+  .hero__info-label {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--color-crimson);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero__divider {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    .hero__divider {
+      display: block;
+      width: var(--border-thin);
+      align-self: stretch;
+      background-color: var(--color-crimson);
+      opacity: 0.4;
+    }
+  }
+
+  .hero__address {
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+  }
+
+  .hero__cta {
+    font-size: var(--text-base);
+    padding: var(--space-sm) var(--space-xl);
+    letter-spacing: 0.03em;
+  }
+
+  /* Decorative corner ornaments */
+  .hero__corner {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    border-color: var(--color-cobalt);
+    opacity: 0.4;
+  }
+
+  .hero__corner--tl {
+    top: var(--space-lg);
+    left: var(--content-padding);
+    border-top: var(--border-medium) solid;
+    border-left: var(--border-medium) solid;
+    border-color: inherit;
+  }
+
+  .hero__corner--br {
+    bottom: var(--space-lg);
+    right: var(--content-padding);
+    border-bottom: var(--border-medium) solid;
+    border-right: var(--border-medium) solid;
+    border-color: inherit;
+  }
+
+  @media (min-width: 64rem) {
+    .hero__corner {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  .hero__illustration {
+    position: absolute;
+    bottom: var(--space-xl);
+    right: calc(var(--content-padding) + 2rem);
+    opacity: 0.25;
+    transform: rotate(12deg);
+    display: none;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__illustration {
+      display: block;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero__illustration {
+      right: 12%;
+      bottom: 20%;
+      opacity: 0.3;
+    }
+
+    .hero__illustration img {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>

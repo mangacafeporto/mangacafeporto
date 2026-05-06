@@ -1,0 +1,287 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+const sections = [
+  { id: 'hero', label: locale === 'pt' ? 'Início' : 'Home', kanji: '家' },
+  { id: 'pricing', label: t.nav.pricing, kanji: '料金' },
+  { id: 'menu', label: t.nav.menu, kanji: 'メニュー' },
+  { id: 'library', label: t.nav.library, kanji: '漫画' },
+  { id: 'events', label: t.nav.events, kanji: 'イベント' },
+  { id: 'gallery', label: t.nav.gallery, kanji: '空間' },
+  { id: 'contact', label: t.nav.contact, kanji: '場所' },
+];
+---
+
+<!-- Desktop: Book tabs on right edge -->
+<nav class="book-tabs" aria-label="Section navigation">
+  {sections.map((section) => (
+    <a href={`#${section.id}`} class="book-tab" data-section={section.id}>
+      <span class="book-tab__kanji">{section.kanji}</span>
+      <span class="book-tab__label">{section.label}</span>
+    </a>
+  ))}
+</nav>
+
+<!-- Mobile: Hanko stamp menu -->
+<div class="hanko-menu">
+  <button
+    class="hanko-trigger"
+    aria-label={locale === 'pt' ? 'Abrir menu' : 'Open menu'}
+    aria-expanded="false"
+  >
+    <svg class="hanko-stamp" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+      <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2" />
+      <text x="24" y="28" text-anchor="middle" font-size="14" font-family="'Shippori Mincho', serif" fill="currentColor">漫</text>
+    </svg>
+  </button>
+
+  <div class="hanko-links" aria-hidden="true">
+    {sections.map((section, i) => (
+      <a
+        href={`#${section.id}`}
+        class="hanko-link"
+        style={`--delay: ${i * 50}ms; --rotate: ${(i % 2 === 0 ? -1 : 1) * (2 + i)}deg;`}
+      >
+        {section.label}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  const trigger = document.querySelector('.hanko-trigger');
+  const links = document.querySelector('.hanko-links');
+
+  trigger?.addEventListener('click', () => {
+    const expanded = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!expanded));
+    links?.setAttribute('aria-hidden', String(expanded));
+    document.body.classList.toggle('menu-open', !expanded);
+  });
+
+  // Close menu on link click
+  links?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      trigger?.setAttribute('aria-expanded', 'false');
+      links?.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+    });
+  });
+
+  // Active section tracking — highlight the tab whose section is most prominent
+  const navSections = document.querySelectorAll('section[id]');
+  const tabs = document.querySelectorAll('.book-tab');
+  const visibleSections = new Set<string>();
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.add(entry.target.id);
+        } else {
+          visibleSections.delete(entry.target.id);
+        }
+      });
+
+      // Activate the first visible section in DOM order
+      let activeId = '';
+      for (const section of navSections) {
+        if (visibleSections.has(section.id)) {
+          activeId = section.id;
+          break;
+        }
+      }
+
+      if (activeId) {
+        tabs.forEach((tab) => {
+          tab.classList.toggle('active', tab.getAttribute('data-section') === activeId);
+        });
+      }
+    },
+    { threshold: 0, rootMargin: '-20% 0px -60% 0px' }
+  );
+
+  navSections.forEach((section) => sectionObserver.observe(section));
+</script>
+
+<style>
+  /* ===== Desktop Book Tabs ===== */
+  .book-tabs {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  @media (min-width: 64rem) {
+    .book-tabs {
+      display: flex;
+    }
+  }
+
+  .book-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.6em 0.7em 0.6em 0.9em;
+    background-color: var(--color-cream);
+    border: var(--border-thin) solid var(--color-crimson);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    color: var(--color-text-muted);
+    font-family: var(--font-jp);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transform: translateX(calc(100% - 2.4em));
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+  }
+
+  .book-tab:hover,
+  .book-tab.active {
+    transform: translateX(0);
+    color: var(--color-crimson);
+    background-color: var(--color-cream-dark);
+  }
+
+  /* Adjacent tabs peek out near the active one */
+  .book-tab.active + .book-tab {
+    transform: translateX(calc(100% - 3.8em));
+  }
+
+  .book-tab:has(+ .book-tab.active) {
+    transform: translateX(calc(100% - 3.8em));
+  }
+
+  .book-tab.active + .book-tab:hover,
+  .book-tab:has(+ .book-tab.active):hover {
+    transform: translateX(0);
+  }
+
+  .book-tab.active {
+    border-color: var(--color-crimson);
+    border-width: var(--border-medium);
+    font-weight: 600;
+  }
+
+  .book-tab__kanji {
+    font-family: var(--font-jp);
+    font-size: 1.2em;
+  }
+
+  .book-tab__label {
+    font-family: var(--font-body);
+    font-size: 0.95em;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== Mobile Hanko Stamp Menu ===== */
+  .hanko-menu {
+    display: block;
+    position: fixed;
+    bottom: var(--space-md);
+    right: var(--space-md);
+    z-index: 900;
+  }
+
+  @media (min-width: 64rem) {
+    .hanko-menu {
+      display: none;
+    }
+  }
+
+  .hanko-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--color-cream);
+    border: var(--border-medium) solid var(--color-crimson);
+    border-radius: 50%;
+    color: var(--color-crimson);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(42, 33, 24, 0.12);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .hanko-trigger:hover {
+    transform: scale(1.05);
+  }
+
+  .hanko-trigger[aria-expanded='true'] {
+    background: var(--color-crimson);
+    color: var(--color-cream);
+  }
+
+  .hanko-stamp {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hanko-links {
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-out),
+                visibility 0s var(--duration-normal);
+  }
+
+  .hanko-links[aria-hidden='false'] {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transition: opacity var(--duration-normal) var(--ease-out),
+                visibility 0s;
+  }
+
+  .hanko-link {
+    display: block;
+    padding: 0.5em 1em;
+    background: var(--color-cream);
+    border: var(--border-thin) solid var(--color-crimson);
+    border-radius: 2px;
+    color: var(--color-crimson);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    text-align: right;
+    white-space: nowrap;
+    transform: rotate(var(--rotate, 0deg)) translateY(10px);
+    opacity: 0;
+    transition:
+      transform var(--duration-normal) var(--ease-out) var(--delay, 0ms),
+      opacity var(--duration-normal) var(--ease-out) var(--delay, 0ms);
+    box-shadow: 1px 2px 4px rgba(42, 33, 24, 0.08);
+  }
+
+  .hanko-links[aria-hidden='false'] .hanko-link {
+    transform: rotate(var(--rotate, 0deg)) translateY(0);
+    opacity: 1;
+  }
+
+  .hanko-link:hover {
+    background: var(--color-crimson);
+    color: var(--color-cream);
+  }
+</style>

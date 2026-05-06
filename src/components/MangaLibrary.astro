@@ -1,0 +1,186 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section id="library" class="library" aria-labelledby="library-title">
+  <div class="library__inner container">
+    <!-- Scattered illustrations -->
+    <img src="/images/illustrations/sake-cups.svg" alt="" class="library__deco library__deco--1" aria-hidden="true" width="34" height="34" />
+    <img src="/images/illustrations/sake-bottle.svg" alt="" class="library__deco library__deco--2" aria-hidden="true" width="30" height="30" />
+    <div class="library__header reveal">
+      <h2 id="library-title" class="library__title">{t.library.title}</h2>
+      <span class="jp-accent">{t.library.jp}</span>
+      <img src="/images/illustrations/manga-book.svg" alt="" class="library__illustration" aria-hidden="true" width="48" height="48" />
+    </div>
+
+    <p class="library__desc reveal">{t.library.description}</p>
+
+    <!-- Manga highlights -->
+    <div class="library__highlights reveal">
+      {t.library.highlights.map((title: string, i: number) => (
+        <span
+          class="library__manga-title"
+          style={`--rotate: ${(i % 2 === 0 ? -1 : 1) * (1 + i * 0.5)}deg`}
+        >
+          {title}
+        </span>
+      ))}
+    </div>
+
+    <!-- Shelf photos -->
+    <div class="library__photos reveal">
+      <div class="library__photo library__photo--1">
+        <img src="/images/shelves-1.jpg" alt={locale === 'pt' ? 'Prateleira de manga' : 'Manga shelf'} loading="lazy" decoding="async" />
+      </div>
+      <div class="library__photo library__photo--2">
+        <img src="/images/shelves-2.jpg" alt={locale === 'pt' ? 'Volumes de manga' : 'Manga volumes'} loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .library {
+    border-top: var(--border-thin) solid var(--color-crimson);
+    overflow: hidden;
+  }
+
+  .library__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  .library__deco {
+    position: absolute;
+    opacity: 0.15;
+    pointer-events: none;
+    display: none;
+  }
+
+  @media (min-width: 48rem) {
+    .library__deco { display: block; }
+    .library__deco--1 { top: 25%; right: 1%; transform: rotate(18deg); }
+    .library__deco--2 { bottom: 25%; left: 5%; transform: rotate(-12deg); }
+  }
+
+  .library__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  .library__title {
+    color: var(--color-crimson);
+  }
+
+  .library__illustration {
+    opacity: 0.35;
+    transform: rotate(5deg);
+    margin-left: auto;
+  }
+
+  .library__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-light);
+    max-width: 50ch;
+    line-height: 1.7;
+  }
+
+  /* Manga title tags — scattered like stamps */
+  .library__highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding-block: var(--space-md);
+  }
+
+  .library__manga-title {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    border: var(--border-thin) solid var(--color-crimson);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--color-crimson);
+    transform: rotate(var(--rotate, 0deg));
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .library__manga-title:nth-child(even) {
+    border-color: var(--color-cobalt);
+    color: var(--color-cobalt);
+  }
+
+  .library__manga-title:hover {
+    transform: rotate(0deg) scale(1.05);
+  }
+
+  /* Shelf photos */
+  .library__photos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    overflow: visible;
+    padding: var(--space-md);
+  }
+
+  @media (min-width: 40rem) {
+    .library__photos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .library__photo {
+    aspect-ratio: 4 / 3;
+    border: var(--border-thin) solid var(--color-text-muted);
+    overflow: hidden;
+  }
+
+  .library__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .library__photo--1 {
+    transform: rotate(-1deg);
+  }
+
+  .library__photo--2 {
+    transform: rotate(1.5deg);
+  }
+
+  .library__photo {
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) var(--ease-out);
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    .library__photo:hover {
+      transform: rotate(0deg) scale(1.15);
+      z-index: 20;
+      border-color: var(--color-text);
+      border-width: 2px;
+      box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
+    }
+  }
+
+  /* Touch tap feedback */
+  .library__photo:active {
+    transform: rotate(0deg) scale(1.1);
+    z-index: 20;
+    border-color: var(--color-text);
+    box-shadow: 4px 6px 20px rgba(42, 33, 24, 0.35);
+  }
+</style>

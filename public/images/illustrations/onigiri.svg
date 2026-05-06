@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Onigiri (rice ball) — naive hand-drawn style -->
+  <!-- Main triangle shape with rounded corners -->
+  <path d="M40 12 C42 12, 62 42, 64 50 C66 56, 62 62, 56 64 L24 64 C18 62, 14 56, 16 50 C18 42, 38 12, 40 12 Z" stroke="#C8302C" stroke-width="2.5"/>
+  <!-- Nori (seaweed) wrap at bottom -->
+  <path d="M24 48 L24 64 C24 64, 30 66, 40 66 C50 66, 56 64, 56 64 L56 48 C56 48, 50 52, 40 52 C30 52, 24 48, 24 48 Z" stroke="#C8302C" stroke-width="2" fill="#C8302C" opacity="0.15"/>
+  <!-- Rice texture dots -->
+  <circle cx="36" cy="34" r="1" fill="#C8302C" opacity="0.3"/>
+  <circle cx="44" cy="38" r="1" fill="#C8302C" opacity="0.3"/>
+  <circle cx="40" cy="28" r="1" fill="#C8302C" opacity="0.3"/>
+</svg>

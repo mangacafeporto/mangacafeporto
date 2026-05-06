@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Manga book — naive hand-drawn style -->
+  <!-- Back cover -->
+  <rect x="14" y="16" width="36" height="50" rx="2" stroke="#C8302C" stroke-width="2" opacity="0.4"/>
+  <!-- Front cover, slightly rotated -->
+  <g transform="rotate(-5, 40, 40)">
+    <rect x="22" y="14" width="36" height="50" rx="2" stroke="#C8302C" stroke-width="2.5"/>
+    <!-- Spine -->
+    <line x1="22" y1="14" x2="22" y2="64" stroke="#C8302C" stroke-width="2.5"/>
+    <!-- Title lines on cover -->
+    <line x1="30" y1="24" x2="50" y2="24" stroke="#C8302C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="30" y1="30" x2="44" y2="30" stroke="#C8302C" stroke-width="1.5" opacity="0.6"/>
+    <!-- Small frame for "illustration" -->
+    <rect x="30" y="36" width="20" height="16" rx="1" stroke="#C8302C" stroke-width="1" opacity="0.3"/>
+  </g>
+</svg>

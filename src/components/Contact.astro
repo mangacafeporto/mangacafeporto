@@ -1,0 +1,160 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+const mapSrc =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1502.2!2d-8.6198!3d41.1533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2464e2f3c5be53%3A0x0!2sR.%20de%20Cedofeita%20170%2C%204050-173%20Porto!5e0!3m2!1spt!2spt';
+---
+
+<section
+  id='contact'
+  class='contact'
+  aria-labelledby='contact-title'>
+  <div class='contact__inner container'>
+    <!-- Scattered illustrations -->
+    <img src='/images/illustrations/sake-bottle.svg' alt='' class='contact__deco contact__deco--1' aria-hidden='true' width='30' height='30' />
+    <img src='/images/illustrations/onigiri.svg' alt='' class='contact__deco contact__deco--2' aria-hidden='true' width='36' height='36' />
+    <div class='contact__header reveal'>
+      <h2
+        id='contact-title'
+        class='contact__title'
+        >{t.contact.title}</h2
+      >
+      <span class='jp-accent'>{t.contact.jp}</span>
+      <img src='/images/illustrations/manga-book.svg' alt='' class='contact__illustration' aria-hidden='true' width='44' height='44' />
+    </div>
+
+    <div class='contact__content'>
+      <div class='contact__info reveal'>
+        <address class='contact__address'>
+          {t.contact.address}
+        </address>
+
+        <div class='contact__social'>
+          <a
+            href='https://www.instagram.com/mangacafe_porto'
+            target='_blank'
+            rel='noopener noreferrer'
+            class='link-animated'>
+            Instagram
+          </a>
+          <a
+            href='https://www.facebook.com/people/MANGA-CAFE-PORTO'
+            target='_blank'
+            rel='noopener noreferrer'
+            class='link-animated'>
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <div class='contact__map reveal'>
+        <iframe
+          src={mapSrc}
+          width='100%'
+          height='350'
+          style='border:0;'
+          allowfullscreen=''
+          loading='lazy'
+          referrerpolicy='no-referrer-when-downgrade'
+          title={locale === 'pt' ? 'Mapa — Manga Café Porto' : 'Map — Manga Café Porto'}
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    border-top: var(--border-thin) solid var(--color-cobalt);
+  }
+
+  .contact__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  .contact__deco {
+    position: absolute;
+    opacity: 0.15;
+    pointer-events: none;
+    display: none;
+  }
+
+  @media (min-width: 48rem) {
+    .contact__deco { display: block; }
+    .contact__deco--1 { top: 20%; right: 0%; transform: rotate(16deg); }
+    .contact__deco--2 { bottom: 15%; left: 3%; transform: rotate(-10deg); }
+  }
+
+  .contact__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  .contact__title {
+    color: var(--color-crimson);
+  }
+
+  .contact__illustration {
+    opacity: 0.3;
+    transform: rotate(-5deg);
+    margin-left: auto;
+  }
+
+  .contact__content {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 48rem) {
+    .contact__content {
+      grid-template-columns: 1fr 1.5fr;
+      align-items: start;
+    }
+  }
+
+  .contact__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .contact__address {
+    font-style: normal;
+    font-size: var(--text-lg);
+    line-height: 1.6;
+  }
+
+  .contact__social {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .contact__social a {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    color: var(--color-crimson);
+  }
+
+  .contact__map {
+    border: var(--border-medium) solid var(--color-crimson);
+    overflow: hidden;
+    transform: rotate(-0.5deg);
+  }
+
+  .contact__map iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+</style>

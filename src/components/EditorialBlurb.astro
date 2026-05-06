@@ -1,0 +1,72 @@
+---
+import { type Locale, getTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<div class="blurb reveal">
+  <div class="blurb__inner container">
+    <div class="blurb__border" aria-hidden="true"></div>
+    <blockquote class="blurb__text">
+      {t.blurb.text}
+    </blockquote>
+    <div class="blurb__border" aria-hidden="true"></div>
+    <img src="/images/illustrations/wavy-line.svg" alt="" class="blurb__illustration" aria-hidden="true" width="80" height="20" />
+  </div>
+</div>
+
+<style>
+  .blurb {
+    padding-block: var(--space-xl);
+  }
+
+  .blurb__inner {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .blurb__border {
+    width: 100%;
+    height: 0;
+    border-top: var(--border-thin) solid var(--color-crimson);
+    border-bottom: var(--border-thin) solid var(--color-crimson);
+    padding-block: 2px;
+  }
+
+  .blurb__illustration {
+    opacity: 0.25;
+    transform: rotate(3deg);
+    margin-top: calc(-1 * var(--space-sm));
+  }
+
+  .blurb__text {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-style: italic;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.7;
+    max-width: 50ch;
+    padding-inline: var(--space-md);
+  }
+
+  @media (min-width: 40rem) {
+    .blurb__text {
+      font-size: var(--text-xl);
+    }
+
+    .blurb__inner {
+      /* Slight asymmetry — offset left on desktop */
+      margin-left: 5%;
+      margin-right: auto;
+    }
+  }
+</style>

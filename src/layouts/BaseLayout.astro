@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+import { type Locale, getTranslations, getAlternateLocale, getLocalePath } from '../i18n';
+import Navigation from '../components/Navigation.astro';
+import LangToggle from '../components/LangToggle.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const altLocale = getAlternateLocale(locale);
+const altUrl = getLocalePath(altLocale);
+---
+
+<!DOCTYPE html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{t.site.title}</title>
+    <meta name="description" content={t.site.og_description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={t.site.title} />
+    <meta property="og:description" content={t.site.og_description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === 'pt' ? 'pt_PT' : 'en_US'} />
+    <meta property="og:site_name" content="Manga Café Porto" />
+
+    <!-- Alternate language -->
+    <link rel="alternate" hreflang={altLocale} href={altUrl} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Shippori+Mincho:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+  </head>
+  <body>
+    <a href="#hero" class="sr-only">Skip to content</a>
+    <LangToggle locale={locale} altLocale={altLocale} altUrl={altUrl} />
+    <Navigation locale={locale} />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer locale={locale} />
+
+    <!-- Scroll reveal observer -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

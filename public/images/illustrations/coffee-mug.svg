@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Coffee mug — naive hand-drawn style -->
+  <path d="M18 28 C18 26, 20 24, 22 24 L50 24 C52 24, 54 26, 54 28 L54 54 C54 58, 50 62, 44 62 L28 62 C22 62, 18 58, 18 54 Z" stroke="#1E47B8" stroke-width="2.5"/>
+  <!-- Handle -->
+  <path d="M54 32 C60 32, 64 36, 64 42 C64 48, 60 52, 54 52" stroke="#1E47B8" stroke-width="2.5"/>
+  <!-- Steam lines -->
+  <path d="M30 18 C30 14, 34 12, 32 8" stroke="#1E47B8" stroke-width="1.5" opacity="0.6"/>
+  <path d="M38 16 C38 12, 42 10, 40 6" stroke="#1E47B8" stroke-width="1.5" opacity="0.6"/>
+  <path d="M46 18 C46 14, 50 12, 48 8" stroke="#1E47B8" stroke-width="1.5" opacity="0.6"/>
+</svg>

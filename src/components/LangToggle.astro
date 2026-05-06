@@ -1,0 +1,72 @@
+---
+import { type Locale, getTranslations, getAlternateLocale, getLocalePath } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  altLocale: Locale;
+  altUrl: string;
+}
+
+const { locale, altLocale, altUrl } = Astro.props;
+---
+
+<div class="lang-toggle">
+  {locale === 'pt' ? (
+    <span class="lang-option active" aria-current="page">PT</span>
+  ) : (
+    <a href={getLocalePath('pt')} class="lang-option" aria-label="Português">PT</a>
+  )}
+  <span class="lang-divider">|</span>
+  {locale === 'en' ? (
+    <span class="lang-option active" aria-current="page">EN</span>
+  ) : (
+    <a href={getLocalePath('en')} class="lang-option" aria-label="English">EN</a>
+  )}
+</div>
+
+<style>
+  .lang-toggle {
+    position: fixed;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .lang-option {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 0.15em 0.3em;
+    position: relative;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .lang-option.active {
+    color: var(--color-crimson);
+  }
+
+  /* Hand-drawn red circle around active language */
+  .lang-option.active::after {
+    content: '';
+    position: absolute;
+    inset: -4px -6px;
+    border: var(--border-medium) solid var(--color-crimson);
+    border-radius: 50% 45% 55% 48% / 48% 52% 45% 55%;
+    transform: rotate(-3deg);
+    pointer-events: none;
+  }
+
+  .lang-option:not(.active):hover {
+    color: var(--color-text);
+  }
+
+  .lang-divider {
+    color: var(--color-text-muted);
+    user-select: none;
+  }
+</style>
